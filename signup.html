@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Sign Up</title>
+<link rel="stylesheet" type="text/css" href="assets/styles.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>UI Final Project</h1>
+    </div>
+
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="login.html">Log In</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="cart.html">Cart</a>
+    </div>
+
+    <div class="content">
+        <h2>Sign Up</h2>
+        <form action="/submit_signup" method="post" onsubmit="return validatePassword()">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br>
+            <label for="repassword">Re-enter Password:</label><br>
+            <input type="password" id="repassword" name="repassword"><br><br>
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+
+    <div class="footer">
+        <a href="signup.html#top">Back to Top</a>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var repassword = document.getElementById("repassword").value;
+            if (password != repassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</body>
+</html>

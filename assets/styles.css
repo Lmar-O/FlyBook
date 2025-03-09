@@ -1,0 +1,35 @@
+body {
+    background-color: #ffffff;
+    color: #6E7076;
+    font-family: Roboto, sans-serif;
+}
+table {
+    width: 100%;
+}
+.header {
+    background-color: #6133ed;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.nav {
+    background-color: #2cd4d9;
+    text-align: center;
+    padding: 10px;
+}
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+.content {
+    padding: 20px;
+}
+.footer {
+    background-color: #2cd4d9;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
