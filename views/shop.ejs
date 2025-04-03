@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Shop</title>
+<link rel="stylesheet" href="/styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="page-title">
+        <h1>Shop</h1>
+    </div>
+
+    <div class="search-center">
+        <button>Filters</button>
+        <input id="search-input" class="search-bar" type="text" placeholder="Search"></input>
+        <button id="search-button">Search</button>
+    </div>
+    <hr />
+    <div>
+        <h3>Filter Options:</h3>
+        <div>
+            <div class="radio">
+                <label><input id="genre-filter-fantasy" type="radio" name="optradio">Fantasy</label>
+            </div>
+            <div class="radio">
+                <label><input id="genre-filter-adventure" type="radio" name="optradio">Adventure</label>
+            </div>
+            <div class="radio">
+                <label><input id="genre-filter-educational" type="radio" name="optradio">Educational</label>
+            </div>
+        </div>
+        <label>Author:</label>
+        <input id="author-filter" type="text" placeholder="Author"></input>
+    </div>
+    <hr />
+    <div class="content">
+        <ul id="results-list"></ul>
+    </div>
+
+    <div class="shop-items-container">
+        <div class="item-card">
+            <p>1</p>
+        </div>
+        <div class="item-card">
+            <p>2</p>
+        </div>
+        <div class="item-card">
+            <p>3</p>
+        </div>
+        <div class="item-card">
+            <p>4</p>
+        </div>
+        <div class="item-card">
+            <p>5</p>
+        </div>
+        <div class="item-card">
+            <p>6</p>
+        </div>
+        <div class="item-card">
+            <p>7</p>
+        </div>
+        <div class="item-card">
+            <p>8</p>
+        </div>
+        <div class="item-card">
+            <p>9</p>
+        </div>
+
+    </div>
+</body>
+</html>
+
+<script type="text/javascript" src="/scripts/search.js"></script>

@@ -1,0 +1,141 @@
+:root {
+    --primary-color: rgb(209, 118, 0);
+    --primary-color-dark: rgb(194, 110, 0);
+    --hover-color: rgb(233, 144, 27);
+    --text-color-a: rgb(255, 255, 255);
+    --text-color-a-25: rgb(225, 225, 225);
+    --text-color-a-50: rgb(200, 200, 200);
+    --text-color-b: rgb(0, 0, 0);
+    --text-color-b-25: rgb(30, 30, 30);
+    --text-color-b-50: rgb(80, 80, 80);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5rem;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--text-color-a);
+    color: var(--text-color-b)
+}
+
+.search-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.orange-btn {
+    background-color: darkorange;
+    border: 1px, solid, grey;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.page-title {
+    font-size: 16;
+    text-align: center;
+}
+
+.fly-book-navbar {
+    background-color: var(--primary-color);
+    box-shadow: 0px 2px 10px var(--text-color-b);
+    border-color: var(--primary-color-dark) !important;
+    border-radius: 0px !important;
+}
+
+.fly-book-navbar-text {
+    color: var(--text-color-a) !important;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+nav > div > ul > li > a {
+    background-color: var(--primary-color) !important;
+    color: var(--text-color-a) !important;
+    font-size: medium;
+    font-weight: bold;
+}
+
+nav > div > div > a {
+    background-color: var(--primary-color) !important;
+    color: var(--text-color-a) !important;
+}
+
+nav > div > ul > li > a:hover {
+    background-color: var(--hover-color) !important;
+}
+
+.first-nav-el {
+    border-left: 2px solid var(--primary-color-dark);
+}
+
+nav > div > ul > li {
+    border-right: 2px solid var(--primary-color-dark);
+}
+
+nav > div > ul > li > a {
+    text-align: center;
+    width: 96px;
+}
+
+.cart-nav-el {
+    background-color: yellow !important;
+    color: black !important;
+    overflow: hidden;
+    height: 50px;
+}
+
+.cart-nav-el:hover {
+    background-color: yellow !important;
+    color: black !important;
+}
+
+.shop-items-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 5px solid green;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    justify-content: space-evenly;
+    overflow-y: scroll;
+    justify-items: center;
+}
+
+.item-card {
+    height: 500px;
+    width: 350px;
+    background-color: aqua;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.orders-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 5px solid green;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-content: space-evenly;
+    overflow-y: scroll;
+    justify-items: center;
+}
+
+.order-card {
+    height: 200px;
+    width: 100%;
+    background-color: rgb(165, 165, 165);
+    border: 5px solid rgb(48, 48, 48);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

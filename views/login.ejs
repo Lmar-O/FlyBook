@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Log In</title>
+<link rel="stylesheet" href="/styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="content">
+        <h2>Log In</h2>
+        <form action="/login" method="post">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+
+    <p>
+        This page and the sign up page are very barebones AI generated placeholders for now until functionality can be added our database is set up.
+    </p>
+
+    <div class="footer">
+        <a href="login.html#top">Back to Top</a>
+    </div>
+
+</body>
+</html>

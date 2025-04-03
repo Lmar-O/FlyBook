@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Cart</title>
+<link rel="stylesheet" href="/styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+    <div class="page-title">
+        <h1>Cart</h1>
+    </div>
+    <% data.forEach(item => { %>
+       <li><%= item.book.name %></li>
+       <li><%= item.book.price %></li>
+       <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+    <% }) %>
+
+</body>
+</html>
+
+<script type="text/javascript" src="/scripts/cart.js"></script>

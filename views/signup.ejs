@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Sign Up</title>
+<link rel="stylesheet" href="/styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+    
+    <div class="content">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="post" onsubmit="return validatePassword()">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="email"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br>
+            <label for="repassword">Re-enter Password:</label><br>
+            <input type="password" id="repassword" name="repassword"><br><br>
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var repassword = document.getElementById("repassword").value;
+            if (password != repassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</body>
+</html>
