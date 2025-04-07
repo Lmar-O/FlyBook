@@ -1,12 +1,13 @@
-const express = require('express')
+import { readFile, readFileSync } from 'node:fs';
+import express, { json, urlencoded } from 'express';
 const app = express()
 const port = 3000
 
 // Enable parsing of JSON request bodies
-app.use(express.json());
+app.use(json());
 
 // Enable parsing of URL-encoded request bodies
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 
 app.use(express.static("public"))
 app.set('view engine', 'ejs')
@@ -24,38 +25,44 @@ let users = [
   }
 ]
 
-let books = [
-  {
-    id : 0,
-    name : "Harry Potter",
-    genre : "Fantasy",
-    author : "James Henry",
-    price : 10.00
-  },
-  {
-    id : 1,
-    name : "Harry Potter V2",
-    genre : "Fantasy",
-    author : "James Henry",
-    price : 15.99
-  },
-  {
-    id : 3,
-    name : "LOTR",
-    genre : "Fantasy",
-    author : "Micheal Jay",
-    price : 12.99
-  },
-  {
-    id : 2,
-    name : "Introduction to Algorithms",
-    genre : "Educational",
-    author : "Aubrey Levy",
-    price : 15.00
-  },
-]
+let books = []
 
-// Functions //
+let genres_array = []
+
+// -------------- Preliminaries -------------- //
+
+/*  
+    Reads data from the csv file and stores it in the 
+    books array
+*/
+const raw_csv = readFileSync('books.csv', 'utf8');
+
+const lines = raw_csv.split('\n');
+  
+for(let i = 1; i < lines.length; i++) {
+  const parsedLines = lines[i].split(',')
+  const splitPrice = parsedLines[3].split(' ')
+  const book_csv = {
+    id: i,
+    title: parsedLines[0],
+    author: parsedLines[1],
+    genre: parsedLines[2],
+    price: parsedLines[3],
+    priceNum: parseFloat(splitPrice[0])
+  }
+  
+  books.push(book_csv)
+}
+
+//console.log(books)
+
+const genres_map = new Map(books.map(book => [book.genre, "hi"]));
+genres_array = Array.from(genres_map.keys())
+
+// console.log(genres_array)
+// console.log(genres_array.length)
+
+// -------------- Functions -------------- //
 function logUserInByUsername() {
 
 }
@@ -116,6 +123,8 @@ function removeBookFromCartByID(id) {
   console.log(users[0].shopping_cart)
 }
 
+// ------------------------------------------- //
+
 // ---------------- Home Page ---------------- //
 
 app.get('/', (req, res) => {
@@ -124,6 +133,19 @@ app.get('/', (req, res) => {
   }
   else {
     res.render('index', { username : `${users[0].username}`})
+  }
+})
+
+// -------------------------------------------- //
+
+// ---------------- Settings Page ---------------- //
+
+app.get('/settings', (req, res) => {
+  if(users.length == 0){
+    res.render('settings', { username : "Login"})
+  }
+  else {
+    res.render('settings', { username : `${users[0].username}`})
   }
 })
 
@@ -181,7 +203,11 @@ app.post('/login', (req, res) => {
   if(isAuth) {
     res.redirect("/shop")
   } else {
-    res.render('login', { error: 'authFailed', errMsg: 'Check password and username'})
+    res.render('login', { 
+      error: 'authFailed', 
+      errMsg: 'Check password and username',
+
+    })
   }
 })
 
@@ -273,7 +299,7 @@ app.get('/api/search', (req, res) => {
     return
   }
 
-  let results = books.filter(book => {return (book.name.toLowerCase().includes(query.toLowerCase()))});   // search filter
+  let results = books.filter(book => {return (book.title.toLowerCase().includes(query.toLowerCase()))});   // search filter
 
   if(genre != null)
     results = books.filter(book => {return (book.genre.toLowerCase() == genre.toLowerCase())});           // genre filter
@@ -297,11 +323,35 @@ app.get('/shop', (req, res) => {
     const data = {
       books: books,
       username: users.length != 0 ? users[0].username : "Login",
+      genres: genres_array
     }
 
     res.render('shop', { data: data })
   } else {
     res.render('shop')
+  }
+})
+
+// -------------------------------------------- //
+
+// ---------------- Checkout Page ---------------- //
+
+app.get('/checkout', (req, res) => {
+  if(users.length > 0) {
+    const cart = users[0].shopping_cart
+    let total;
+    cart.forEach((item) => {
+      total += item.priceNum;
+    })
+
+    const data = {
+      cart: cart,
+      total: total,
+    }
+
+    res.render('checkout', { data: data })
+  } else {
+    res.redirect('login')
   }
 })
 

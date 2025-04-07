@@ -21,16 +21,12 @@
     <hr />
     <div>
         <h3>Filter Options:</h3>
-        <div>
-            <div class="radio">
-                <label><input id="genre-filter-fantasy" type="radio" name="optradio">Fantasy</label>
-            </div>
-            <div class="radio">
-                <label><input id="genre-filter-adventure" type="radio" name="optradio">Adventure</label>
-            </div>
-            <div class="radio">
-                <label><input id="genre-filter-educational" type="radio" name="optradio">Educational</label>
-            </div>
+        <div id="genres-container">
+                <% data.genres.forEach((genre) => { %>
+                <div class="radio">
+                    <label class="genre-filter-label"><input class="genre-filter-button" type="radio" name="optradio"><%=genre%></label>
+                </div>
+                <% }) %>
         </div>
         <label>Author:</label>
         <input id="author-filter" type="text" placeholder="Author"></input>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Cart</title>
+<link rel="stylesheet" href="/styles/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="page-title">
+        <h1>Checkout</h1>
+    </div>
+    <hr />
+
+    <div class="checkout-review-container">
+        <div class="checkout-content-tmp">
+            <% data.forEach(item => { %>
+                <li><%= item.book.name %></li>
+                <li><%= item.book.price %></li>
+                <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+             <% }) %>
+        </div>
+        <div class="checkout-vert-line">
+        </div>
+        <div class="checkout-content-tmp">
+
+        </div>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript" src="/scripts/cart.js"></script>

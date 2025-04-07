@@ -5,21 +5,29 @@ const fantasyRadioButton = document.getElementById('genre-filter-fantasy');
 const adventureRadioButton = document.getElementById('genre-filter-adventure');
 const educationalRadioButton = document.getElementById('genre-filter-educational');
 const authorInputField = document.getElementById('author-filter');
+const genresContainer = document.getElementById('genres-container');
 
 
 searchButton.addEventListener('click', () => {
     const query = searchInput.value;
-    let searchStr = `api/search?q=${query}`
+    let searchStr = `api/search?q=${query}`;
+    // let genre_test;
 
-    if(fantasyRadioButton.checked == true) {
-        searchStr = searchStr + '&genre=Fantasy'
-    } else
-    if(adventureRadioButton.checked == true) {
-        searchStr = searchStr + '&genre=Adventure'
-    } else
-    if(educationalRadioButton.checked == true) {
-        searchStr = searchStr + '&genre=Educational'
+    const radio_collection = genresContainer.getElementsByClassName("genre-filter-button")
+    for(let i = 0; i < radio_collection.length; i++) {
+        if(radio_collection[i].checked) {
+            searchStr = searchStr + `&genre=${radio_collection[i].parentElement.textContent}`
+        }
     }
+    // if(fantasyRadioButton.checked == true) {
+    //     searchStr = searchStr + '&genre=Fantasy'
+    // } else
+    // if(adventureRadioButton.checked == true) {
+    //     searchStr = searchStr + '&genre=Adventure'
+    // } else
+    // if(educationalRadioButton.checked == true) {
+    //     searchStr = searchStr + '&genre=Educational'
+    // }
 
     if(authorInputField.value != null && authorInputField.value != "") {
         searchStr = searchStr + `&author=${authorInputField.value}`

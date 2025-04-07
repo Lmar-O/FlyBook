@@ -2,6 +2,33 @@
     --primary-color: rgb(209, 118, 0);
     --primary-color-dark: rgb(194, 110, 0);
     --hover-color: rgb(233, 144, 27);
+    --button-border-color-a: #734202;
+    --text-color-a: rgb(255, 255, 255);
+    --text-color-a-25: rgb(225, 225, 225);
+    --text-color-a-50: rgb(200, 200, 200);
+    --text-color-b: rgb(0, 0, 0);
+    --text-color-b-25: rgb(30, 30, 30);
+    --text-color-b-50: rgb(80, 80, 80);
+}
+
+.dark-mode {
+    --primary-color: rgb(80, 80, 80);
+    --primary-color-dark: rgb(30, 30, 30);
+    --hover-color: rgb(90, 54, 0);
+    --button-border-color-a: rgb(80, 80, 80);
+    --text-color-a: rgb(0, 0, 0);
+    --text-color-a-25:rgb(30, 30, 30);
+    --text-color-a-50: rgb(80, 80, 80);
+    --text-color-b: rgb(255, 255, 255);
+    --text-color-b-25: rgb(225, 225, 225);
+    --text-color-b-50: rgb(200, 200, 200);
+}
+
+.light-mode {
+    --primary-color: rgb(209, 118, 0);
+    --primary-color-dark: rgb(194, 110, 0);
+    --hover-color: rgb(233, 144, 27);
+    --button-border-color-a: #734202;
     --text-color-a: rgb(255, 255, 255);
     --text-color-a-25: rgb(225, 225, 225);
     --text-color-a-50: rgb(200, 200, 200);
@@ -47,6 +74,8 @@ body {
     text-align: center;
 }
 
+/* ---------------------- Navbar styles ---------------------- */
+
 .fly-book-navbar {
     background-color: var(--primary-color);
     box-shadow: 0px 2px 10px var(--text-color-b);
@@ -86,7 +115,7 @@ nav > div > ul > li {
 
 nav > div > ul > li > a {
     text-align: center;
-    width: 96px;
+    width: 120px;
 }
 
 .cart-nav-el {
@@ -100,6 +129,8 @@ nav > div > ul > li > a {
     background-color: yellow !important;
     color: black !important;
 }
+
+/* ---------------------- Shop styles ---------------------- */
 
 .shop-items-container {
     margin-left: 5%;
@@ -138,4 +169,165 @@ nav > div > ul > li > a {
     background-color: rgb(165, 165, 165);
     border: 5px solid rgb(48, 48, 48);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* ---------------------- Settings styles ---------------------- */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: auto;
+    margin-right: 10%
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #757575;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+a.setting-back-button {
+    background-color: var(--primary-color-dark);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--button-border-color-a);
+    height: 50px;
+    width: 96px;
+    border-radius: 10px;
+}
+
+a.setting-back-button:hover {
+    background-color: var(--hover-color);
+}
+
+div.setting-page-banner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: var(--primary-color);
+    font-weight: bold;
+    height: 70px;
+    > h1 {
+        color: white
+    }
+}
+
+.setting-flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 50px;
+}
+
+.setting-flex-container:hover {
+    background-color: var(--text-color-a-50);
+    border-radius: 10px;
+}
+
+.settings-container {
+    background-color: #757575;
+    border-color: black;
+    border-radius: 10px;
+}
+
+.setting-name-container {
+    vertical-align: middle;
+    margin-left: 10%
+}
+
+.setting-name {
+    font-weight: bold;
+    margin-right: auto;
+    text-align: left;
+    vertical-align: middle;
+}
+
+svg.back-arrow-icon {
+    rotate: 180deg;
+}
+
+/* ---------------------- Checkout styles ---------------------- */
+.checkout-review-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 5px solid #bbbbbb;
+    border-radius: 10px;
+    background-color: #bbbbbb;
+    display: grid;
+    grid-template-columns: 1fr 3px 1fr;
+    gap: 3px;
+    align-items: center;
+    justify-items: center;
+    height: calc(100vh - 200px);
+}
+
+.checkout-content-tmp {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.checkout-vert-line {
+    height: 100%;
+    width: 3px;
+    background-color: #757575;
 }
