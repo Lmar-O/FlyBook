@@ -719,6 +719,10 @@ p.summary-total {
     margin: 0px !important;
 }
 
+.total-info {
+    height: 100%;
+}
+
 .checkout-vert-line {
     height: 100%;
     width: 3px;

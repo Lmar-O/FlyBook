@@ -26,16 +26,21 @@ function addItemToCart(id) {
         body: JSON.stringify(data)
     })
     .then(response => {
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return response.json();
     })
     .then(result => {
-        console.log('Success:', result.book.title);
-        msgFeedbackItemName.textContent = `${result.book.title}`
-        console.log(msgFeedback.style.display)
-        msgFeedback.style.display = 'flex'
+        if(result.errMsg == 'noLoginError') {
+            window.location.replace("login");
+        } else {
+            console.log('Success:', result.book.title);
+            msgFeedbackItemName.textContent = `${result.book.title}`
+            console.log(msgFeedback.style.display)
+            msgFeedback.style.display = 'flex'
+        }
     })
     .catch(error => {
         console.error('Error:', error);

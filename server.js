@@ -13,17 +13,20 @@ app.use(express.static("public"))
 app.set('view engine', 'ejs')
 
 // Variables //
+
+// {
+//   username : "testUser01",
+//   password : "password123",
+//   email : "something@test.com",
+//   shopping_cart : [],
+//   orders : []
+// }
+
 let logged_in_user = null
 
-let users = [
-  {
-    username : "testUser01",
-    password : "password123",
-    email : "something@test.com",
-    shopping_cart : [],
-    orders : []
-  }
-]
+let users = [] // logged in user length should never exceed one
+
+let user_accounts = [] // this is the "database of all users"
 
 let books = []
 
@@ -94,6 +97,7 @@ function buyAllItemsInCart() {
   }
 
   users[0].orders.push(new_order)
+  users[0].shopping_cart = []
 }
 
 function getBookByID(id) {
@@ -182,7 +186,9 @@ app.post('/signup', (req, res) => {
   }
 
   // Server side validation omitted for now
-  users.push(user)
+  // console.log('User was added to database')
+  // console.log(user)
+  user_accounts.push(user) // changed
   //console.log(users)
 
   // A redirect to login seems a bit rushed
@@ -207,15 +213,39 @@ app.post('/login', (req, res) => {
   let isAuth = false;
 
   // Search the "database" for a user with matching credentials
-  users.forEach((stored_user) => {
-    if(user.username == stored_user.username &&
-       user.password == stored_user.password) {
-        isAuth = true;
+  let new_user_login_index = 0
+
+  if(user_accounts != null)                           // if there are account that exist in the database
+    for(let i = 0; i < user_accounts.length; i++) {   // iterate through the database and find the index of
+      if(user.username == user_accounts[i].username &&     // user that is trying to log in
+        user.password == user_accounts[i].password) {
+         isAuth = true;
+         new_user_login_index = i;
+     }
     }
-  })
 
   
   if(isAuth) {
+    // Edge case: if users.length == 1, then a swap must be performed
+    // Find the current logged-in users index in the database
+    // Update current logged-in users account
+    // Swap current logged-in user with the new logged-in user
+    if(users.length >= 1) {
+      let curr_logged_in_user_index = 0
+      
+      for(let i = 0; i < user_accounts.length; i++) { // iterate through database
+        if(users[0].username == user_accounts[i].username && users[0].password == user_accounts[i].password) { 
+          curr_logged_in_user_index = i
+        }
+      }
+
+      // Update current logged-in users account
+      user_accounts[curr_logged_in_user_index] = users[0]
+    }
+
+    // Swap current logged-in user with the new logged-in user
+    users[0] = user_accounts[new_user_login_index]
+
     res.redirect("/shop")
   } else {
     res.render('login', { 
@@ -271,7 +301,8 @@ app.post('/api/cart/add/:id', (req, res) => {
   const qty = 1
 
   if(users.length == 0) {
-    res.redirect('./login')
+    console.log('this error was sent')
+    res.status(200).send({errMsg: 'noLoginError'})
   } else {
     const result = addBookToCartByID(id, qty) // this is so bad
     const book_data = getBookByID(id)
@@ -314,18 +345,18 @@ app.get('/api/search', (req, res) => {
     return
   }
 
-  let results = books.filter(book => {return (book.title.toLowerCase().includes(query.toLowerCase()))});   // search filter
+  let results_a = books.filter(book => {return (book.title.toLowerCase().includes(query.toLowerCase()))});   // search filter
 
   if(genre != null)
-    results = results.filter(book => {return (book.genre.toLowerCase() == genre.toLowerCase())});           // genre filter
+    results_a = results_a.filter(book => {return (book.genre.toLowerCase() == genre.toLowerCase())});           // genre filter
 
   if(author != null)
-    results = results.filter(book => {return (book.author.toLowerCase().includes(author.toLowerCase()))});  // author filter
+    results_a = results_a.filter(book => {return (book.author.toLowerCase().includes(author.toLowerCase()))});  // author filter
 
   if(maxSize != null && results.length > maxSize)
-    results = results.slice(0, maxSize);                                                                    // max size filter
+    results_a = results_a.slice(0, maxSize);                                                                    // max size filter
 
-  res.status(200).json(results);
+  res.status(200).json(results_a);
 })
 
 // -------------------------------------------- //
@@ -333,18 +364,14 @@ app.get('/api/search', (req, res) => {
 // ---------------- Shop Page ---------------- //
 
 app.get('/shop', (req, res) => {
-  if(users.length > 0) {
-
-    const data = {
-      books: books,
-      username: users.length != 0 ? users[0].username : "Login",
-      genres: genres_array
-    }
-
-    res.render('shop', { data: data })
-  } else {
-    res.render('shop')
+  
+  const data = {
+    books: books,
+    username: users.length != 0 ? users[0].username : "Login",
+    genres: genres_array
   }
+
+  res.render('shop', { data: data })
 })
 
 // -------------------------------------------- //
