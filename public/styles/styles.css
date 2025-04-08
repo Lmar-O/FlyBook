@@ -264,6 +264,81 @@ a.item-button:hover {
     grid-template-columns: auto auto auto;
 }
 
+.msg-feedback {
+    background-color: #c4e7b8;
+    width: 90%;
+    justify-self: anchor-center;
+    height: 70px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: calc(100vh - 210px);
+    border: 3px, solid, black;
+    border-radius: 10px;
+    z-index: 1;
+    position: fixed;
+    display: none;
+    justify-content: space-between;
+    padding: 1%;
+}
+
+.msg-feedback label {
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    align-content: center;
+}
+
+.msg-feedback-button-container {
+    display: flex;
+    min-width: 195px;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+a.ok-button {
+    background-color: rgb(68 84 139);
+    border: 2px, solid, black;
+    color: var(--text-color-a);
+    height: 100%; 
+    width: 60px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    align-content: center;
+    cursor: pointer;
+}
+
+a.ok-button:hover {
+    background-color: rgb(88, 106, 167);
+}
+
+a.goToCart-button {
+    background-color: rgb(217, 255, 0);
+    border: 2px, solid, black;
+    color: black;
+    height: 100%; 
+    width: 100px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    align-content: center;
+    cursor: pointer;
+}
+
+a.goToCart-button:hover {
+    background-color: rgb(239, 255, 147);
+    
+}
+
+.msg-feedback-item-name {
+    font-weight: 900;
+}
+
 .radio + .radio, .checkbox + .checkbox {
     margin-top: 0px !important;
 }

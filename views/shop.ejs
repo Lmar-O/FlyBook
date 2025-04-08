@@ -13,6 +13,14 @@
         <h1>Shop</h1>
     </div>
 
+    <div class="msg-feedback" id="msg-feedback">
+        <label><span class="msg-feedback-item-name" id="msg-feedback-item-name">item</span> successfully added to cart</label>
+        <div class="msg-feedback-button-container">
+            <a class="ok-button" id="ok-button">Ok</a>
+            <a class="goToCart-button" href="cart">Go To Cart</a>
+        </div>
+    </div>
+
     <div class="search-center">
         <button id="filter-button">Filters</button>
         <input id="search-input" class="search-bar" type="text" placeholder="Search"></input>
@@ -25,11 +33,11 @@
             <div class="filter-flex-item">
                 <h3 class="filter-subtitle">Filter Options:</h3>
                 <div id="genres-container">
-                        <% data.genres.forEach((genre) => { %>
+                    <% data.genres.forEach((genre) => { %>
                         <div class="radio">
                             <label class="genre-filter-label"><input class="genre-filter-button" type="radio" name="optradio"><%=genre%></label>
                         </div>
-                        <% }) %>
+                    <% }) %>
                 </div>
             </div>
             <div class="filter-flex-item">

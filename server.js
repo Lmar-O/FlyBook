@@ -96,6 +96,15 @@ function buyAllItemsInCart() {
   users[0].orders.push(new_order)
 }
 
+function getBookByID(id) {
+  for(let i = 0; i < books.length; i++) {                 // Find book by id
+    if(books[i].id == id) {
+      const found_book = books[i]
+      return found_book
+    }
+  }
+}
+
 function addBookToCartByID(id, qty) {
   let book = null
 
@@ -264,12 +273,12 @@ app.post('/api/cart/add/:id', (req, res) => {
   if(users.length == 0) {
     res.redirect('./login')
   } else {
-    const result = addBookToCartByID(id, qty)
-
+    const result = addBookToCartByID(id, qty) // this is so bad
+    const book_data = getBookByID(id)
     if(result == -1) {
       res.status(404).send({errMsg: 'Error: Book not found'})
     } else {
-      res.status(200).send({Success: 'success'})
+      res.status(200).send({Success: 'success', book: book_data})
     }
   }
 })

@@ -4,7 +4,13 @@ const resultsList = document.getElementById('results-list');
 const authorInputField = document.getElementById('author-filter');
 const genresContainer = document.getElementById('genres-container');
 const shopItemsContainer = document.getElementById('shop-items-container');
+const msgFeedback = document.getElementById('msg-feedback');
+const msgFeedbackItemName = document.getElementById('msg-feedback-item-name');
+const okButton = document.getElementById('ok-button');
 
+okButton.addEventListener("click", () => {
+    msgFeedback.style.display = 'none'
+})
 
 function addItemToCart(id) {
     const url = `api/cart/add/${id}`;
@@ -26,7 +32,10 @@ function addItemToCart(id) {
     return response.json();
     })
     .then(result => {
-        console.log('Success:', result);
+        console.log('Success:', result.book.title);
+        msgFeedbackItemName.textContent = `${result.book.title}`
+        console.log(msgFeedback.style.display)
+        msgFeedback.style.display = 'flex'
     })
     .catch(error => {
         console.error('Error:', error);
@@ -58,6 +67,8 @@ searchButton.addEventListener('click', () => {
         .then(response => response.json())
         .then(data => {
             shopItemsContainer.innerHTML = '';
+
+            if(data == null || data.length > 0) {
             data.forEach(item => {
                 const markup = `<div class="item-card">
             <div>
@@ -78,59 +89,11 @@ searchButton.addEventListener('click', () => {
         </div>`
             
             shopItemsContainer.insertAdjacentHTML('beforeend', markup)
-
-                // const li_id = document.createElement('li');
-                // const li_title = document.createElement('li');
-                // const li_genre = document.createElement('li');
-                // const li_author = document.createElement('li');
-                // const li_price = document.createElement('li');
-                // const add_to_cart_button = document.createElement('button');
-                // const hr_element = document.createElement('hr');
-
-                // li_id.textContent = item.id;
-                // li_title.textContent = item.title;
-                // li_genre.textContent = item.genre;
-                // li_author.textContent = item.author;
-                // li_price.textContent = item.price;
-
-                // add_to_cart_button.textContent = 'Add to Cart';
-                // add_to_cart_button.onclick = function() {
-                //     const url = `api/cart/add/${item.id}`;
-                //     const data = {
-                //         hello: "hello"
-                //     };
-
-                //     fetch(url, {
-                //         method: 'POST',
-                //         headers: {
-                //             'Content-Type': 'application/json'
-                //         },
-                //         body: JSON.stringify(data)
-                //     })
-                //     .then(response => {
-                //     if (!response.ok) {
-                //         throw new Error(`HTTP error! status: ${response.status}`);
-                //     }
-                //     return response.json();
-                //     })
-                //     .then(result => {
-                //         console.log('Success:', result);
-                //     })
-                //     .catch(error => {
-                //         console.error('Error:', error);
-                //     });
-
-                // };
-
-                // resultsList.appendChild(li_id);
-                // resultsList.appendChild(li_title);
-                // resultsList.appendChild(li_genre);
-                // resultsList.appendChild(li_author);
-                // resultsList.appendChild(li_price);
-                // resultsList.appendChild(add_to_cart_button);
                 
-
-                // resultsList.appendChild(hr_element);
             });
+            } else {
+                const markup = '<p>No results found<p>'
+                shopItemsContainer.insertAdjacentHTML('beforeend', markup)
+            }
         });
 });
