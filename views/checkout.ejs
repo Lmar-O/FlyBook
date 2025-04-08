@@ -15,27 +15,71 @@
     <hr />
 
     <div class="checkout-review-container">
-        <div class="checkout-content-tmp">
-            <h2>Payment</h2>
-            <form action="/checkout" method="post">
-                <label>Credit Card Number</label><br>
-                <input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="Credit Card Number">
-                <label>CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="CVV">
-                <label>Card Holder Name</label>
-                <input type="text" id="cardHolderName" name="cardHolderName" placeholder="Card Holder Name">
-                <input type="submit">
+        <div class="checkout-content-payment-container">
+            <h2 class="checkout-subtitle">Payment</h2>
+            <hr>
+            <form class="form-horizontal" action="/checkout" method="post">
+                <div class="checkout-content-payment-subcontainer">
+                    <div class="field-input-container">
+                        <label>Credit Card Number</label><br>
+                        <input class="form-control" type="text" id="creditCardNumber" name="creditCardNumber" placeholder="Credit Card Number"><br>
+                    </div>
+                    <div class="field-input-container">
+                        <label>CVV</label><br>
+                        <input class="form-control" type="text" id="cvv" name="cvv" placeholder="CVV"><br>
+                    </div>
+                    <div class="field-input-container">
+                        <label>Card Holder Name</label><br>
+                        <input class="form-control" type="text" id="cardHolderName" name="cardHolderName" placeholder="Card Holder Name"><br>
+                    </div>
+                    <div class="field-input-container">
+                        <label>Country</label><br>
+                        <input class="form-control" type="text" id="country" name="country" placeholder="Country"><br>
+                    </div>
+                    <div class="field-input-container">
+                        <label>State</label><br>
+                        <input class="form-control" type="text" id="state" name="state" placeholder="State"><br>
+                    </div>
+                    <div class="field-input-container">
+                        <label>Zip Code</label><br>
+                        <input class="form-control" type="text" id="zipCode" name="zipCode" placeholder="Zip Code"><br>
+                    </div>
+                    <div class="field-input-container">
+                        <label>Home Address</label><br>
+                        <input class="form-control" type="text" id="homeAddress" name="homeAddress" placeholder="Home Address"><br>
+                    </div>
+                    <br><br>
+
+                    <input class="checkout-submit-button" type="submit" value="Purchase Items">
+                </div>
             </form>
         </div>
         <div class="checkout-vert-line">
         </div>
-        <div class="checkout-content-tmp">
-            <h2>Summary</h2>
-            <% data.cart.forEach(item => { %>
-                <li><%= item.book.title %></li>
-                <li><%= item.book.price %></li>
-                <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
-            <% }) %>
+        <div class="checkout-content-summary-container">
+            <h2 class="checkout-subtitle">Summary</h2>
+            <hr>
+            <div class="checkout-content-summary-subcontainer">
+                <% data.cart.forEach(item => { %>
+                    <div class="checkout-content-summary-item-container">
+                        <div class="title">
+                            <p class="summary-title"><%= item.book.title %></p>
+                        </div>
+                        <div class="price">
+                            <p class="summary-title"><%= item.book.price %></p>
+                        </div>
+                        <div class="button-container">
+                            <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+                        </div>
+                    </div>        
+                <% }) %>
+            </div>
+
+            <div class="total-info">
+                <div class="title">
+                    <p class="summary-total">Total: <%= data.total_posttax %> USD</p>
+                </div>
+            </div>
         </div>
     </div>
 </body>

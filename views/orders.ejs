@@ -20,14 +20,9 @@
     <div class="orders-container">  
     <% data.forEach((order) => { %>
         <div class="order-card">
-            <p><%= order.total %></p>
-            <p><%= order.date %></p>
-            <% order.items_purchased.forEach((item) => { %>
-                <p><%= item.book.title %></p>
-                <p><%= item.book.genre %></p>
-                <p><%= item.book.author %></p>
-                <p><%= item.book.price %></p>
-            <% }) %>
+            <p><span style="font-weight: bold;">Transaction ID:</span> <%= order.id %></p>
+            <p><span style="font-weight: bold;">Total:</span> $<%= order.total %></p>
+            <p><span style="font-weight: bold;">Date of Transaction: </span><%= order.date %></p>
         </div>
 
     <% })} %>

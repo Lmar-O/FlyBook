@@ -79,12 +79,12 @@ function buyAllItemsInCart() {
 
   const order_id = users[0].orders.length + 1
 
-  const dateObj = new Date()
-  const day = dateObj.getDay()
-  const month = dateObj.getMonth()
-  const year = dateObj.getFullYear()
+  const now = new Date()
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0');
 
-  const date_str = day + '/' + month + '/' + year
+  const date_str = `${month}/${day}/${year}`
 
   const new_order = {
     id: order_id,
@@ -126,8 +126,8 @@ function addBookToCartByID(id, qty) {
   
   users[0].shopping_cart.push(cart_item)                  // Push into the logged in user's cart
 
-  console.log("Item was added to cart:")
-  console.log(cart_item)
+  // console.log("Item was added to cart:")
+  // console.log(cart_item)
 }
 
 function removeBookFromCartByID(id) {
@@ -354,7 +354,7 @@ app.get('/shop', (req, res) => {
 app.get('/checkout', (req, res) => {
   if(users.length > 0) {
     const cart = users[0].shopping_cart
-    const salesTax = 8.25;
+    const salesTax = 1;
     let total_pretax = 0;
     let total_posttax = 0;
 
@@ -362,7 +362,9 @@ app.get('/checkout', (req, res) => {
       total_pretax += item.book.priceNum;
     })
 
-    total_posttax = total_pretax * 8.25
+    total_posttax = total_pretax * salesTax
+
+    total_posttax = Math.round(total_posttax * 100)  / 100
 
     const data = {
       cart: cart,

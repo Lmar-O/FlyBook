@@ -10,23 +10,20 @@
     <%- include('../partials/navbar.ejs') %>
 
     <div class="content">
-        <h2>Log In</h2>
-        <form action="/login" method="post">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required><br><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br><br>
-            <input type="submit" value="Log In">
-        </form>
+        <div class="login-form">
+            <h2 class="login-title">Log In</h2>
+            <div class="login-h-line"></div><br><br><br>
+            <form class="form-horizontal" action="/login" method="post">
+                <label class="login-form-field-label" for="username">Username:</label><br>
+                <input class="form-control" type="text" id="username" name="username" required><br><br>
+                <label class="login-form-field-label" for="password">Password:</label><br>
+                <input class="form-control" type="password" id="password" name="password" required><br><br>
+                <div class="signup-link-position-right">
+                    <a href="signup">Create an account</a><br>
+                </div>
+                <input class="login-input-button" type="submit" value="Log In">
+            </form>
+        </div>
     </div>
-
-    <p>
-        This page and the sign up page are very barebones AI generated placeholders for now until functionality can be added our database is set up.
-    </p>
-
-    <div class="footer">
-        <a href="login.html#top">Back to Top</a>
-    </div>
-
 </body>
 </html>

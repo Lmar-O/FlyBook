@@ -130,7 +130,7 @@ label {
 }
 
 .cart-nav-el:hover {
-    background-color: yellow !important;
+    background-color: rgb(255, 255, 161) !important;
     color: black !important;
 }
 
@@ -268,10 +268,10 @@ a.item-button:hover {
     background-color: #c4e7b8;
     width: 90%;
     justify-self: anchor-center;
-    height: 70px;
+    height: 100px;
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: calc(100vh - 210px);
+    margin-top: calc(100vh - 240px);
     border: 3px, solid, black;
     border-radius: 10px;
     z-index: 1;
@@ -289,7 +289,7 @@ a.item-button:hover {
 
 .msg-feedback-button-container {
     display: flex;
-    min-width: 195px;
+    min-width: 260px;
     justify-content: space-between;
     flex-wrap: nowrap;
 }
@@ -299,7 +299,7 @@ a.ok-button {
     border: 2px, solid, black;
     color: var(--text-color-a);
     height: 100%; 
-    width: 60px;
+    width: 80px;
     text-align: center;
     display: inline-block;
     font-size: 16px;
@@ -319,7 +319,7 @@ a.goToCart-button {
     border: 2px, solid, black;
     color: black;
     height: 100%; 
-    width: 100px;
+    width: 150px;
     text-align: center;
     display: inline-block;
     font-size: 16px;
@@ -333,6 +333,32 @@ a.goToCart-button {
 a.goToCart-button:hover {
     background-color: rgb(239, 255, 147);
     
+}
+
+button.toggle-filters-panel-button {
+    height: 50px;
+    width: 50px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.search-input {
+    height: 50px;
+    width: 400px;
+    min-width: 200px;
+    padding-left: 10px;
+}
+
+.search-button {
+    height: 50px;
+    width: 100px;
+    background-color: var(--primary-color);
+    border-radius: 0px 10px 10px 0px;
+    color: white;
+    font-weight: 600;
+    align-content: center;
 }
 
 .msg-feedback-item-name {
@@ -353,22 +379,109 @@ a.goToCart-button:hover {
 .orders-container {
     margin-left: 5%;
     margin-right: 5%;
-    border: 5px solid green;
+    width: 60%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
     justify-content: space-evenly;
-    overflow-y: scroll;
     justify-items: center;
+    justify-self: center;
 }
 
 .order-card {
     height: 200px;
     width: 100%;
-    background-color: rgb(165, 165, 165);
-    border: 5px solid rgb(48, 48, 48);
+    background-color: rgb(255 255 255);
+    border: 1px solid rgb(177 177 177);
+    border-radius: 10px;
+    padding: 1%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    justify-content: space-around;
+    align-items: anchor-center;
 }
+
+.order-card button {
+    height: 70px;
+    width: 70px;
+    background-color: #e30f0f;
+    color: white;
+    font-weight: 800;
+    border: 3px solid #792020;
+    border-radius: 10px;
+}
+
+/* ---------------------- Cart styles ---------------------- */
+
+.cart-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 800px;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-content: space-around;
+    justify-items: center;
+}
+
+.cart-card {
+    height: 200px;
+    width: auto;
+    background-color: rgb(255 255 255);
+    border: 1px solid rgb(177 177 177);
+    border-radius: 10px;
+    padding: 1%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    justify-content: center;
+    align-items: anchor-center;
+}
+
+.cart-img-container {
+    height: 175px;
+    width: 175px;
+}
+
+.cart-img-container img {
+    height: 100%;
+    width: 100%;
+    background-color: #959595;
+    border-radius: 10px;
+}
+
+.cart-book-info {
+    height: 150px;
+    width: 200px;
+    padding-left: 20px;
+    align-content: center;
+}
+
+p.cart-title {
+    font-weight: 800;
+}
+
+p.cart-subtitle {
+    color: grey;
+    font-weight: 600;
+}
+
+.cart-card div.cart-button-container {
+    padding-left: 100px;
+    min-width: 70px;
+}
+
+.cart-card div button {
+    height: 70px;
+    width: 70px;
+    background-color: #e30f0f;
+    color: white;
+    font-weight: 800;
+    border: 3px solid #792020;
+    border-radius: 10px;
+    
+}
+
 
 /* ---------------------- Settings styles ---------------------- */
 
@@ -447,6 +560,7 @@ a.setting-back-button {
 
 a.setting-back-button:hover {
     background-color: var(--hover-color);
+    cursor: pointer;
 }
 
 div.setting-page-banner {
@@ -506,23 +620,103 @@ svg.back-arrow-icon {
 .checkout-review-container {
     margin-left: 5%;
     margin-right: 5%;
-    border: 5px solid #bbbbbb;
+    border: 4px solid var(--button-border-color-a);
     border-radius: 10px;
-    background-color: #bbbbbb;
+    background-color: var(--primary-color);
     display: grid;
     grid-template-columns: 1fr 3px 1fr;
     gap: 3px;
     align-items: center;
     justify-items: center;
     height: calc(100vh - 200px);
+    padding: 1%;
 }
 
-.checkout-content-tmp {
+h2.checkout-subtitle {
+    justify-self: center;
+}
+
+.checkout-content-payment-container {
     height: 100%;
     width: 100%;
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.checkout-content-payment-subcontainer {
+    display: flex;
+    flex-direction: column;
+    padding: 4%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    align-items: center;
+}
+
+.field-input-container {
+    width: 100%
+}
+
+input.checkout-submit-button {
+    height: 50px;
+    width: 135px;
+    background-color: var(--primary-color);
+    border-radius: 10px 10px 10px 10px;
+    color: white;
+    font-weight: 600;
+    align-content: center;
+}
+
+.checkout-content-summary-container {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.checkout-content-summary-subcontainer {
+    display: flex;
+    height: 70%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 4%;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.checkout-content-summary-item-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 85px;
+    background-color: aliceblue;
+}
+
+.checkout-content-summary-item-container div {
+    align-content: center;
+}
+
+.checkout-content-summary-item-container div button {
+    height: 60%;
+    width: 100px;
+    background-color: #e30f0f;
+    color: white;
+    font-weight: 800;
+    border: 3px solid #792020;
+    border-radius: 10px;
+}
+
+p.summary-title {
+    font-weight: 800;
+    margin: 0px !important;
+}
+
+p.summary-total {
+    font-weight: 800;
+    font-size: x-large;
+    margin: 0px !important;
 }
 
 .checkout-vert-line {
@@ -543,6 +737,7 @@ a.orange-button {
     font-weight: bold;
     text-decoration: none;
     border-radius: 10px;
+    align-content: center;
 }
 
 a.orange-button:hover {
@@ -552,4 +747,73 @@ a.orange-button:hover {
 a.cart-button-position {
     margin-left: 85%;
     margin-top: 10px
+}
+
+/* ---------------------- Login styles ---------------------- */
+.login-form {
+    background-color: #ffffff;
+    margin-top: 10%;
+    height: 450px;
+    width: 500px;
+    padding: 1%;
+    justify-self: anchor-center;
+    border: 4px solid black;
+    box-shadow: 0px 0px 20px;
+    border-radius: 10px;
+}
+
+.login-title {
+    font-size: 32px;
+    text-align: center;
+}
+
+.login-h-line {
+    width: 90%;
+    height: 4px;
+    background-color: orange;
+    justify-self: center;
+}
+
+.login-form-field-label {
+    color: black;
+}
+
+.login-input-button {
+    height: 50px;
+    width: 135px;
+    background-color: var(--primary-color);
+    border-radius: 10px 10px 10px 10px;
+    color: white;
+    font-weight: 600;
+    align-content: center;
+}
+
+/* ---------------------- Signup styles ---------------------- */
+
+.signup-link-position-right {
+    justify-self: right;
+    padding-bottom: 20px;
+}
+
+.signup-form {
+    background-color: #ffffff;
+    margin-top: 10%;
+    height: 530px;
+    width: 500px;
+    padding: 1%;
+    justify-self: anchor-center;
+    border: 4px solid black;
+    box-shadow: 0px 0px 20px;
+    border-radius: 10px;
+}
+
+.signup-input-button {
+    height: 50px;
+    width: 135px;
+    background-color: var(--primary-color);
+    border-radius: 10px 10px 10px 10px;
+    color: white;
+    font-weight: 600;
+    align-content: center;
+    justify-self: center;
 }

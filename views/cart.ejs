@@ -15,14 +15,22 @@
     <% if(data == null || data.length < 1) { %>
         <p>No items in cart</p>
     <% } else { %>
-        <div class="orders-container">
+        <div class="cart-container">
         <% data.forEach((item) => { %>
-            <div class="order-card">
-                <p><%= item.book.title %></p>
-                <p><%= item.book.genre %></p>
-                <p><%= item.book.author %></p>
-                <p><%= item.book.price %></p>
-                <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+            <div class="cart-card">
+                <div class="cart-img-container">
+                   <img /> 
+                </div>
+                <div class="cart-book-info">
+                    <p class="cart-title"><%= item.book.title %></p>
+                    <p class="cart-subtitle">by <%= item.book.author %></p>
+                    <p class="cart-subtitle"><%= item.book.genre %></p>
+                    <hr />
+                    <p class="cart-title"><%= item.book.price %></p>
+                </div>
+                <div class="cart-button-container">
+                    <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+                </div>
             </div>
         <% }) %>
 

@@ -8,21 +8,29 @@
 </head>
 <body>
     <%- include('../partials/navbar.ejs') %>
-    
     <div class="content">
-        <h2>Sign Up</h2>
-        <form action="/signup" method="post" onsubmit="return validatePassword()">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
-            <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email"><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password"><br>
-            <label for="repassword">Re-enter Password:</label><br>
-            <input type="password" id="repassword" name="repassword"><br><br>
-            <input type="submit" value="Sign Up">
-        </form>
+        <div class="signup-form">
+            <h2 class="login-title">Sign up</h2>
+            <div class="login-h-line"></div><br><br><br>
+            <form class="form-horizontal" action="/login" method="post">
+                <label class="login-form-field-label" for="username">Username:</label><br>
+                <input class="form-control" type="text" id="username" name="username"><br>
+                <label class="login-form-field-label" for="email">Email:</label><br>
+                <input class="form-control" type="text" id="email" name="email"><br>
+                <label class="login-form-field-label" for="password">Password:</label><br>
+                <input class="form-control" type="password" id="password" name="password"><br>
+                <label class="login-form-field-label" for="repassword">Re-enter Password:</label><br>
+                <input class="form-control" type="password" id="repassword" name="repassword"><br><br>
+
+                <input class="signup-input-button" type="submit" value="Sign Up">
+            </form>
+        </div>
     </div>
+
+
+    <form class="form-horizontal" action="/signup" method="post" onsubmit="return validatePassword()">
+        
+    </form>
     <script>
         function validatePassword() {
             var password = document.getElementById("password").value;
