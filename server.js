@@ -69,7 +69,13 @@ function logUserInByUsername() {
 
 function buyAllItemsInCart() {
   let total = 0
-  users[0].shopping_cart.forEach(book => total += book.price)
+  let salesTax = 1.0825
+
+  users[0].shopping_cart.forEach(item => total += item.book.priceNum)
+
+  total *= salesTax
+  
+  total = Math.round(total * 100)  / 100
 
   const order_id = users[0].orders.length + 1
 
@@ -84,7 +90,7 @@ function buyAllItemsInCart() {
     id: order_id,
     total: total,
     date: date_str,
-    items_purchased: shopping_cart
+    items_purchased: users[0].shopping_cart
   }
 
   users[0].orders.push(new_order)
@@ -119,8 +125,8 @@ function removeBookFromCartByID(id) {
   let new_shopping_cart = users[0].shopping_cart.filter(item => item.book.id != id)
   users[0].shopping_cart = new_shopping_cart
 
-  console.log('Current cart:')
-  console.log(users[0].shopping_cart)
+  // console.log('Current cart:')
+  // console.log(users[0].shopping_cart)
 }
 
 // ------------------------------------------- //
@@ -302,13 +308,13 @@ app.get('/api/search', (req, res) => {
   let results = books.filter(book => {return (book.title.toLowerCase().includes(query.toLowerCase()))});   // search filter
 
   if(genre != null)
-    results = books.filter(book => {return (book.genre.toLowerCase() == genre.toLowerCase())});           // genre filter
+    results = results.filter(book => {return (book.genre.toLowerCase() == genre.toLowerCase())});           // genre filter
 
   if(author != null)
-    results = books.filter(book => {return (book.author.toLowerCase().includes(author.toLowerCase()))});  // author filter
+    results = results.filter(book => {return (book.author.toLowerCase().includes(author.toLowerCase()))});  // author filter
 
   if(maxSize != null && results.length > maxSize)
-    results = books.slice(0, maxSize);                                                                    // max size filter
+    results = results.slice(0, maxSize);                                                                    // max size filter
 
   res.status(200).json(results);
 })
@@ -339,17 +345,40 @@ app.get('/shop', (req, res) => {
 app.get('/checkout', (req, res) => {
   if(users.length > 0) {
     const cart = users[0].shopping_cart
-    let total;
+    const salesTax = 8.25;
+    let total_pretax = 0;
+    let total_posttax = 0;
+
     cart.forEach((item) => {
-      total += item.priceNum;
+      total_pretax += item.book.priceNum;
     })
+
+    total_posttax = total_pretax * 8.25
 
     const data = {
       cart: cart,
-      total: total,
+      total_pretax: total_pretax,
+      total_posttax: total_posttax,
     }
 
     res.render('checkout', { data: data })
+  } else {
+    res.redirect('login')
+  }
+})
+
+app.post('/checkout', (req, res) => {
+  // Server side validation skipped for now
+  // console.log(req.body.creditCardNumber)
+  // console.log(req.body.cvv)
+  // console.log(req.body.cardHolderName)
+
+  if(users.length > 0) {
+    buyAllItemsInCart()
+
+    //console.log(users[0])
+
+    res.redirect('shop?success=1')
   } else {
     res.redirect('login')
   }
@@ -360,7 +389,12 @@ app.get('/checkout', (req, res) => {
 // ---------------- Orders Page ---------------- //
 
 app.get('/orders', (req, res) => {
-  res.render('orders')
+
+  if(users.length > 0) {
+    res.render('orders', { data: users[0].orders })
+  } else {
+    res.redirect('login')
+  }
 })
 
 app.get('api/orders', (req, res) => {

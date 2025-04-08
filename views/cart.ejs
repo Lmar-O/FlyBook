@@ -11,13 +11,29 @@
     <div class="page-title">
         <h1>Cart</h1>
     </div>
-    <% data.forEach(item => { %>
-       <li><%= item.book.name %></li>
-       <li><%= item.book.price %></li>
-       <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
-    <% }) %>
 
+    <% if(data == null || data.length < 1) { %>
+        <p>No items in cart</p>
+    <% } else { %>
+        <div class="orders-container">
+        <% data.forEach((item) => { %>
+            <div class="order-card">
+                <p><%= item.book.title %></p>
+                <p><%= item.book.genre %></p>
+                <p><%= item.book.author %></p>
+                <p><%= item.book.price %></p>
+                <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+            </div>
+        <% }) %>
+
+        <a class="orange-button cart-button-position" href="checkout">Proceed to Checkout</a>
+        </div>
+    <% } %>
+    
+
+    
 </body>
 </html>
 
 <script type="text/javascript" src="/scripts/cart.js"></script>
+

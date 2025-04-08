@@ -14,34 +14,23 @@
     </div>
     <hr />
 
-    <div class="orders-container">
+    <% if(data.length == null || data.length < 1) { %>
+        <p>No orders have been found</p>
+    <% } else { %>
+    <div class="orders-container">  
+    <% data.forEach((order) => { %>
         <div class="order-card">
-            <p>1</p>
+            <p><%= order.total %></p>
+            <p><%= order.date %></p>
+            <% order.items_purchased.forEach((item) => { %>
+                <p><%= item.book.title %></p>
+                <p><%= item.book.genre %></p>
+                <p><%= item.book.author %></p>
+                <p><%= item.book.price %></p>
+            <% }) %>
         </div>
-        <div class="order-card">
-            <p>2</p>
-        </div>
-        <div class="order-card">
-            <p>3</p>
-        </div>
-        <div class="order-card">
-            <p>4</p>
-        </div>
-        <div class="order-card">
-            <p>5</p>
-        </div>
-        <div class="order-card">
-            <p>6</p>
-        </div>
-        <div class="order-card">
-            <p>7</p>
-        </div>
-        <div class="order-card">
-            <p>8</p>
-        </div>
-        <div class="order-card">
-            <p>9</p>
-        </div>
+
+    <% })} %>
     </div>
 </body>
 </html>

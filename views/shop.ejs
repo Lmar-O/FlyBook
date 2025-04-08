@@ -14,59 +14,40 @@
     </div>
 
     <div class="search-center">
-        <button>Filters</button>
+        <button id="filter-button">Filters</button>
         <input id="search-input" class="search-bar" type="text" placeholder="Search"></input>
         <button id="search-button">Search</button>
     </div>
     <hr />
-    <div>
-        <h3>Filter Options:</h3>
-        <div id="genres-container">
-                <% data.genres.forEach((genre) => { %>
-                <div class="radio">
-                    <label class="genre-filter-label"><input class="genre-filter-button" type="radio" name="optradio"><%=genre%></label>
+    <div class="filter-panel" id="filter-panel">
+        <h3 class="filter-title">Filters</h3>
+        <div class="filter-flex-container">
+            <div class="filter-flex-item">
+                <h3 class="filter-subtitle">Filter Options:</h3>
+                <div id="genres-container">
+                        <% data.genres.forEach((genre) => { %>
+                        <div class="radio">
+                            <label class="genre-filter-label"><input class="genre-filter-button" type="radio" name="optradio"><%=genre%></label>
+                        </div>
+                        <% }) %>
                 </div>
-                <% }) %>
+            </div>
+            <div class="filter-flex-item">
+                <label>Author:</label>
+                <input id="author-filter" type="text" placeholder="Author"></input>
+            </div>
+            
         </div>
-        <label>Author:</label>
-        <input id="author-filter" type="text" placeholder="Author"></input>
     </div>
-    <hr />
+    
     <div class="content">
         <ul id="results-list"></ul>
     </div>
 
-    <div class="shop-items-container">
-        <div class="item-card">
-            <p>1</p>
-        </div>
-        <div class="item-card">
-            <p>2</p>
-        </div>
-        <div class="item-card">
-            <p>3</p>
-        </div>
-        <div class="item-card">
-            <p>4</p>
-        </div>
-        <div class="item-card">
-            <p>5</p>
-        </div>
-        <div class="item-card">
-            <p>6</p>
-        </div>
-        <div class="item-card">
-            <p>7</p>
-        </div>
-        <div class="item-card">
-            <p>8</p>
-        </div>
-        <div class="item-card">
-            <p>9</p>
-        </div>
-
+    <div class="shop-items-container" id="shop-items-container">
     </div>
 </body>
 </html>
 
 <script type="text/javascript" src="/scripts/search.js"></script>
+<script type="text/javascript" src="/scripts/shop.js"></script>
