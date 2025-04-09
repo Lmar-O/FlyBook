@@ -11,15 +11,18 @@
     <div class="page-title">
         <h1>Cart</h1>
     </div>
+    <hr>
 
     <% if(data == null || data.length < 1) { %>
-        <p>No items in cart</p>
+        <div class="center-content">
+            <p class="no-items-feedback">No items in cart</p>
+        </div>
     <% } else { %>
         <div class="cart-container">
         <% data.forEach((item) => { %>
             <div class="cart-card">
-                <div class="cart-img-container">
-                   <img /> 
+                <div class="cart-items-img-container">
+                   <img src="<%= item.book.filePath %>" alt="Image of <%= item.book.title %> by <%= item.book.author %>"/> 
                 </div>
                 <div class="cart-book-info">
                     <p class="cart-title"><%= item.book.title %></p>
@@ -29,13 +32,16 @@
                     <p class="cart-title"><%= item.book.price %></p>
                 </div>
                 <div class="cart-button-container">
-                    <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+                    <button aria-label="Remove <%= item.book.title %> by <%= item.book.author %> from cart" onclick="removeItem('<%= item.book.id %>')">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="65px" viewBox="0 -960 960 960" width="65px" fill="#ffffff"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                    </button>
                 </div>
             </div>
         <% }) %>
-
-        <a class="orange-button cart-button-position" href="checkout">Proceed to Checkout</a>
         </div>
+        <div class="center-content">
+            <a class="orange-button cart-button-position" href="checkout">Proceed to Checkout</a>
+        </div>    
     <% } %>
     
 

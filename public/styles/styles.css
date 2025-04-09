@@ -106,11 +106,15 @@ nav > div > ul > li > a:hover {
 }
 
 .first-nav-el {
-    border-left: 2px solid var(--primary-color-dark);
+    border-left: 2px solid var(--button-border-color-a);
+}
+
+.first-nav-el-right {
+    border-left: 2px solid var(--button-border-color-a);
 }
 
 nav > div > ul > li {
-    border-right: 2px solid var(--primary-color-dark);
+    border-right: 2px solid var(--button-border-color-a);
 }
 
 nav > div > ul > li > a {
@@ -147,6 +151,45 @@ label {
     padding-right: 5px;
 }
 
+.shop-item-info-container {
+    padding-top: 25px;
+    padding-left: 10px;
+}
+
+.shop-items-img-container {
+    justify-self: center;
+    background-color: #ededed;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    border-radius: 10px;
+    padding: 10px;
+
+    > img {
+        border-radius: 11px;
+        max-height: 238px;
+        max-width: 326px;
+    }
+}
+
+.cart-items-img-container {
+    justify-self: center;
+    background-color: #ededed;
+    height: 100%;
+    width: 200px;
+    text-align: center;
+    align-content: center;
+    border-radius: 10px;
+    padding: 10px;
+
+    > img {
+        border-radius: 11px;
+        max-height: 160px;
+        max-width: 326px;
+    }
+}
+
 .item-title-label {
     color: var(--text-color-b);
     font-size: 18px;
@@ -164,6 +207,7 @@ hr.items-mid-break {
     color: rgb(133, 133, 133);
     font-size: 16px;
     font-weight: 400 !important;
+    padding-bottom: 18px;
 }
 
 .item-price-label {
@@ -171,13 +215,7 @@ hr.items-mid-break {
     height: 100%;
     text-align: center;
     align-content: center;
-}
-
-.item-image {
-    border-radius: 11px;
-    height: 238px;
-    width: 326px;
-    background-color: #757575;
+    font-size: x-large;
 }
 
 .item-card {
@@ -218,6 +256,25 @@ a.item-button {
 }
 
 a.item-button:hover {
+    background-color: var(--hover-color);
+}
+
+button.item-button {
+    background-color: var(--primary-color);
+    border: 2px, solid, var(--button-border-color-a);
+    color: var(--text-color-a);
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    align-content: center;
+}
+
+button.item-button:hover {
     background-color: var(--hover-color);
 }
 
@@ -417,24 +474,29 @@ button.toggle-filters-panel-button {
     margin-left: 5%;
     margin-right: 5%;
     width: 800px;
+    height: 60vh;
+    overflow-y: scroll;
     justify-self: center;
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
     justify-content: space-around;
     justify-items: center;
+    background-color: #fff4e5;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .cart-card {
     height: 200px;
-    width: auto;
+    width: 100%;
     background-color: rgb(255 255 255);
     border: 1px solid rgb(177 177 177);
     border-radius: 10px;
     padding: 1%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: anchor-center;
 }
 
@@ -467,13 +529,13 @@ p.cart-subtitle {
 }
 
 .cart-card div.cart-button-container {
-    padding-left: 100px;
+    padding-left: 57px;
     min-width: 70px;
 }
 
 .cart-card div button {
-    height: 70px;
-    width: 70px;
+    height: 95px;
+    width: 99px;
     background-color: #e30f0f;
     color: white;
     font-weight: 800;
@@ -634,6 +696,7 @@ svg.back-arrow-icon {
 
 h2.checkout-subtitle {
     justify-self: center;
+    height: 30px;
 }
 
 .checkout-content-payment-container {
@@ -644,9 +707,14 @@ h2.checkout-subtitle {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.checkout-payment-field-container {
+    width: 100%;
+}
+
 .checkout-content-payment-subcontainer {
     display: flex;
     flex-direction: column;
+    height: 570px;
     padding: 4%;
     overflow-y: scroll;
     overflow-x: scroll;
@@ -655,6 +723,20 @@ h2.checkout-subtitle {
 
 .field-input-container {
     width: 100%
+}
+
+div.checkout-submit-button-container {
+    justify-self: center;
+}
+
+div.center-content {
+    justify-self: center;
+}
+
+div.center-content p.no-items-feedback {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
 }
 
 input.checkout-submit-button {
@@ -677,7 +759,7 @@ input.checkout-submit-button {
 
 .checkout-content-summary-subcontainer {
     display: flex;
-    height: 70%;
+    height: 570px;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
@@ -698,14 +780,26 @@ input.checkout-submit-button {
     align-content: center;
 }
 
+.checkout-content-summary-item-container div.title {
+    width: 250px;
+}
+
+.checkout-content-summary-item-container div.price {
+    width: 80px;
+}
+
 .checkout-content-summary-item-container div button {
-    height: 60%;
+    height: 100%;
     width: 100px;
     background-color: #e30f0f;
     color: white;
     font-weight: 800;
     border: 3px solid #792020;
     border-radius: 10px;
+}
+
+.checkout-content-summary-item-container div.button-container {
+    padding: 10px
 }
 
 p.summary-title {
@@ -715,12 +809,16 @@ p.summary-title {
 
 p.summary-total {
     font-weight: 800;
+    justify-self: right;
     font-size: x-large;
     margin: 0px !important;
+    padding-right: 45px;
 }
 
 .total-info {
-    height: 100%;
+    height: 50px;
+    padding-right: 10px;
+    align-content: center;
 }
 
 .checkout-vert-line {
@@ -750,14 +848,16 @@ a.orange-button:hover {
 
 a.cart-button-position {
     margin-left: 85%;
-    margin-top: 10px
+    margin-top: 10px;
+    height: 80px;
+    width: 205px;
 }
 
 /* ---------------------- Login styles ---------------------- */
 .login-form {
     background-color: #ffffff;
     margin-top: 10%;
-    height: 450px;
+    height: 100%;
     width: 500px;
     padding: 1%;
     justify-self: anchor-center;
@@ -802,7 +902,7 @@ a.cart-button-position {
 .signup-form {
     background-color: #ffffff;
     margin-top: 10%;
-    height: 530px;
+    height: 100%;
     width: 500px;
     padding: 1%;
     justify-self: anchor-center;

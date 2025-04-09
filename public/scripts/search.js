@@ -76,11 +76,11 @@ searchButton.addEventListener('click', () => {
             if(data == null || data.length > 0) {
             data.forEach(item => {
                 const markup = `<div class="item-card">
-            <div>
-                <img class="item-image" />    
+            <div class="shop-items-img-container">
+                <img src="${item.filePath}" alt="Image of ${item.title} by ${item.author}" />    
             </div>
             <div class="item-card-lower-01">
-                <div>
+                <div class="shop-item-info-container">
                     <label class="item-title-label">${item.title}</label><br>
                     <label class="item-subtitle-label">by ${item.author}</label><br>
                     <label class="item-subtitle-label">${item.genre}</label><br>
@@ -88,7 +88,7 @@ searchButton.addEventListener('click', () => {
                 </div>
                 <div class="item-card-lower-02">
                     <label class="item-price-label">${item.price}</label>
-                    <a class="item-button" onclick="addItemToCart(${item.id})"><label>Add to Cart</label></a>
+                    <button class="item-button" aria-label="Add ${item.title} by ${item.author} to Cart" onclick="addItemToCart(${item.id})"><label>Add to Cart</label></button>
                 </div>
             </div>
         </div>`

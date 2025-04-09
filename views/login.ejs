@@ -18,10 +18,18 @@
                 <input class="form-control" type="text" id="username" name="username" required><br><br>
                 <label class="login-form-field-label" for="password">Password:</label><br>
                 <input class="form-control" type="password" id="password" name="password" required><br><br>
+
+                <% if(locals.error != null && locals.error == 'authFailed') { %>
+                    <p class="error-feedback-message">Failed to login. Verify username and password were type correctly</p>
+                <% } %>
+
                 <div class="signup-link-position-right">
                     <a href="signup">Create an account</a><br>
                 </div>
-                <input class="login-input-button" type="submit" value="Log In">
+                
+                <div class="center-content">
+                    <input class="login-input-button" type="submit" value="Log In">
+                </div>
             </form>
         </div>
     </div>

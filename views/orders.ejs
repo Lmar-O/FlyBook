@@ -15,7 +15,9 @@
     <hr />
 
     <% if(data.length == null || data.length < 1) { %>
-        <p>No orders have been found</p>
+        <div class="center-content">
+            <p class="no-items-feedback">No order found</p>
+        </div>
     <% } else { %>
     <div class="orders-container">  
     <% data.forEach((order) => { %>

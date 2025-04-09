@@ -18,38 +18,72 @@
         <div class="checkout-content-payment-container">
             <h2 class="checkout-subtitle">Payment</h2>
             <hr>
-            <form class="form-horizontal" action="/checkout" method="post">
+            <form class="form-horizontal" action="/checkout" method="post" onsubmit="return validateFormData()">
                 <div class="checkout-content-payment-subcontainer">
-                    <div class="field-input-container">
-                        <label>Credit Card Number</label><br>
-                        <input class="form-control" type="text" id="creditCardNumber" name="creditCardNumber" placeholder="Credit Card Number"><br>
+
+                    <div class="checkout-payment-field-container" id="ccn-group">
+                        <label class="login-form-field-label">Credit Card Number</label><br>
+                        <input class="form-control" type="text" id="ccn" name="creditCardNumber" placeholder="Credit Card Number"><br>
+                        <p class="error-feedback-message" id="ccn-feedback"></p>
                     </div>
-                    <div class="field-input-container">
+
+                    <div class="checkout-payment-field-container" id="cvv-group">
                         <label>CVV</label><br>
                         <input class="form-control" type="text" id="cvv" name="cvv" placeholder="CVV"><br>
+                        <p class="error-feedback-message" id="cvv-feedback"></p>
                     </div>
-                    <div class="field-input-container">
+
+                    <div class="checkout-payment-field-container" id="chn-group">
                         <label>Card Holder Name</label><br>
-                        <input class="form-control" type="text" id="cardHolderName" name="cardHolderName" placeholder="Card Holder Name"><br>
+                        <input class="form-control" type="text" id="chn" name="cardHolderName" placeholder="Card Holder Name"><br>
+                        <p class="error-feedback-message" id="chn-feedback"></p>
                     </div>
-                    <div class="field-input-container">
+
+                    <div class="checkout-payment-field-container" id="country-group">
                         <label>Country</label><br>
-                        <input class="form-control" type="text" id="country" name="country" placeholder="Country"><br>
+                        <select class="form-control" id="country" name="country" placeholder="Country">
+                            <option>United States</option>
+                            <option>Canada</option>
+                            <option>Mexico</option>
+                        </select>
+                        <p class="error-feedback-message" id="country-feedback"></p>
                     </div>
-                    <div class="field-input-container">
+
+                    <div class="checkout-payment-field-container" id="state-group">
                         <label>State</label><br>
-                        <input class="form-control" type="text" id="state" name="state" placeholder="State"><br>
+                        <select class="form-control" id="state" name="state" placeholder="State">
+                            <option>Texas</option>
+                            <option>Ohio</option>
+                            <option>Alaska</option>
+                            <option>Maine</option>
+                            <option>New York</option>
+                            <option>New Jersey</option>
+                            <option>Georgia</option>
+                            <option>California</option>
+                            <option>Illinois</option>
+                            <option>Hawaii</option>
+                            <option>Washington D.C.</option>
+                            <option>Rhode Island</option>
+                            <option>Nevada</option>
+                        </select>
+                        <p class="error-feedback-message" id="state-feedback"></p>
                     </div>
-                    <div class="field-input-container">
+
+                    <div class="checkout-payment-field-container" id="zipCode-group">
                         <label>Zip Code</label><br>
                         <input class="form-control" type="text" id="zipCode" name="zipCode" placeholder="Zip Code"><br>
+                        <p class="error-feedback-message" id="zipCode-feedback"></p>
                     </div>
-                    <div class="field-input-container">
+
+                    <div class="checkout-payment-field-container" id="homeAddress-group">
                         <label>Home Address</label><br>
                         <input class="form-control" type="text" id="homeAddress" name="homeAddress" placeholder="Home Address"><br>
+                        <p class="error-feedback-message" id="homeAddress-feedback"></p>
                     </div>
-                    <br><br>
 
+                </div>
+                <hr>
+                <div class="checkout-submit-button-container">
                     <input class="checkout-submit-button" type="submit" value="Purchase Items">
                 </div>
             </form>
@@ -69,15 +103,17 @@
                             <p class="summary-title"><%= item.book.price %></p>
                         </div>
                         <div class="button-container">
-                            <button onclick="removeItem('<%= item.book.id %>')">Remove Item</button>
+                            <button onclick="removeItem('<%= item.book.id %>')">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 -960 960 960" width="100%" fill="#ffffff"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                            </button>
                         </div>
                     </div>        
                 <% }) %>
             </div>
-
+            <hr>
             <div class="total-info">
                 <div class="title">
-                    <p class="summary-total">Total: <%= data.total_posttax %> USD</p>
+                    <p class="summary-total">Total: <%= data.total_posttax.toFixed(2) %> USD</p>
                 </div>
             </div>
         </div>
@@ -86,3 +122,4 @@
 </html>
 
 <script type="text/javascript" src="/scripts/cart.js"></script>
+<script type="text/javascript" src="/scripts/checkout.js"></script>

@@ -51,7 +51,8 @@ for(let i = 1; i < lines.length; i++) {
     author: parsedLines[1],
     genre: parsedLines[2],
     price: parsedLines[3],
-    priceNum: parseFloat(splitPrice[0])
+    priceNum: parseFloat(splitPrice[0]),
+    filePath: `/images/${parsedLines[4]}`
   }
   
   books.push(book_csv)
@@ -186,10 +187,23 @@ app.post('/signup', (req, res) => {
   }
 
   // Server side validation omitted for now
-  // console.log('User was added to database')
-  // console.log(user)
-  user_accounts.push(user) // changed
-  //console.log(users)
+  console.log('User was added to database')
+  console.log(user)
+  
+
+  // if a duplicate user exists, rerender with error
+  // obviously you should not do this in production
+  // because storing plain-text password is a huge
+  // security risk
+  for(let i = 0; i < user_accounts.length; i++) {
+    if(user.username == user_accounts[i].username) {
+      res.render('signup', { error: 'dupUser' })
+      return
+    }
+  }
+
+  // add to 'database'
+  user_accounts.push(user)
 
   // A redirect to login seems a bit rushed
   // a success notification will help
@@ -209,6 +223,9 @@ app.post('/login', (req, res) => {
     username: req.body.username,
     password: req.body.password,
   }
+
+  console.log('User is attempting to login');
+  console.log(user);
 
   let isAuth = false;
 
@@ -353,7 +370,7 @@ app.get('/api/search', (req, res) => {
   if(author != null)
     results_a = results_a.filter(book => {return (book.author.toLowerCase().includes(author.toLowerCase()))});  // author filter
 
-  if(maxSize != null && results.length > maxSize)
+  if(maxSize != null && results_a.length > maxSize)
     results_a = results_a.slice(0, maxSize);                                                                    // max size filter
 
   res.status(200).json(results_a);
