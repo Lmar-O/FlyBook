@@ -16,21 +16,9 @@ app.set('view engine', 'ejs')
 
 let logged_in_user = null
 
-let users = [{
-  username : "testuser",
-  password : "password*8",
-  email : "something@test.com",
-  shopping_cart : [],
-  orders : []
-}] // logged in user length should never exceed one
+let users = [] // logged in user length should never exceed one
 
-let user_accounts = [{
-  username : "testuser",
-  password : "password*8",
-  email : "something@test.com",
-  shopping_cart : [],
-  orders : []
-}] // this is the "database of all users"
+let user_accounts = [] // this is the "database of all users"
 
 let books = []
 
