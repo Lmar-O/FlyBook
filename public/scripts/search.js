@@ -12,6 +12,13 @@ okButton.addEventListener("click", () => {
     msgFeedback.style.display = 'none'
 })
 
+searchInput.addEventListener("keypress", (event) => {
+    if(event.key == "Enter") {
+        event.preventDefault()
+        searchButton.click()
+    }
+})
+
 function addItemToCart(id) {
     const url = `api/cart/add/${id}`;
     const data = {

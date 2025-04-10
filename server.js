@@ -236,7 +236,8 @@ app.post('/signup', (req, res) => {
 app.get('/signout', (req, res) => {
   if(isUserLoggedIn()) {
     users = []
-    res.redirect('/')
+    res.redirect('/') // this code can be reduced but it works, so im not touching it
+    return
   }
 
   res.redirect('/')
@@ -277,7 +278,7 @@ app.post('/login', (req, res) => {
      }
     }
 
-  
+
   if(isAuth) {
     // Edge case: if users.length == 1, then a swap must be performed
     // Find the current logged-in users index in the database
