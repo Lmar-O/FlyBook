@@ -1,7 +1,7 @@
 :root {
-    --primary-color: rgb(209, 118, 0);
+    --primary-color: #d17600;
     --primary-color-dark: rgb(194, 110, 0);
-    --hover-color: rgb(233, 144, 27);
+    --hover-color: #e9901b;
     --button-border-color-a: #734202;
     --text-color-a: rgb(255, 255, 255);
     --text-color-a-25: rgb(225, 225, 225);
@@ -348,8 +348,11 @@ button.item-button:hover {
     border-radius: 6px;
     width: 90%;
     padding: 2rem;
-    justify-self: anchor-center;
     display: none;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    margin: 0 auto; /* Center horizontally within the parent container */
 }
 
 .filter-title {
@@ -393,6 +396,39 @@ button.item-button:hover {
     align-content: center;
     padding: 5px;
     background-color: #fff0d6;
+}
+
+.filter-buttons-container {
+    display: flex;
+    justify-content: space-between; /* Space between the buttons */
+    gap: 10px; /* Add spacing between the buttons */
+    margin-top: 10px;
+    flex-wrap: nowrap; /* Ensure buttons stay on the same line */
+}
+
+.apply-filters-button, .clear-filters-button {
+    width: 50%; /* Each button takes up half the container width */
+    background-color: #d17600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.clear-filters-button {
+    background-color: #7d7d7d;
+}
+
+.apply-filters-button:hover {
+    background-color: #e9901b;
+}
+
+.clear-filters-button:hover {
+    background-color: #7d7d7d92;
 }
 
 .msg-feedback {
