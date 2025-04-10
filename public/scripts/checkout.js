@@ -49,7 +49,7 @@ function validateCCN() {
         return false
     } else
     if(!ccnEl.value.match(/^[0-9]+$/) 
-        || ccnEl.value.length != 10) 
+        || ccnEl.value.length != 16) 
     {
         if(ccnGroupEl.classList.contains('has-success')) {
             ccnGroupEl.classList.remove('has-success')
@@ -59,7 +59,7 @@ function validateCCN() {
             ccnGroupEl.classList.add('has-error')
         }
 
-        ccnFeedbackEl.textContent = 'Credit card field must be a 10 digit number.';
+        ccnFeedbackEl.textContent = 'Credit card field must be a 16 digit number.';
         return false
     }
 
