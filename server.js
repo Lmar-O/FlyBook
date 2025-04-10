@@ -14,19 +14,23 @@ app.set('view engine', 'ejs')
 
 // Variables //
 
-// {
-//   username : "testUser01",
-//   password : "password123",
-//   email : "something@test.com",
-//   shopping_cart : [],
-//   orders : []
-// }
-
 let logged_in_user = null
 
-let users = [] // logged in user length should never exceed one
+let users = [{
+  username : "testuser",
+  password : "password*8",
+  email : "something@test.com",
+  shopping_cart : [],
+  orders : []
+}] // logged in user length should never exceed one
 
-let user_accounts = [] // this is the "database of all users"
+let user_accounts = [{
+  username : "testuser",
+  password : "password*8",
+  email : "something@test.com",
+  shopping_cart : [],
+  orders : []
+}] // this is the "database of all users"
 
 let books = []
 
@@ -69,6 +73,10 @@ genres_array = Array.from(genres_map.keys())
 // -------------- Functions -------------- //
 function logUserInByUsername() {
 
+}
+
+function isUserLoggedIn() {
+  return (users.length == 1) ? true : false
 }
 
 function buyAllItemsInCart() {
@@ -136,8 +144,15 @@ function addBookToCartByID(id, qty) {
 }
 
 function removeBookFromCartByID(id) {
-  let new_shopping_cart = users[0].shopping_cart.filter(item => item.book.id != id)
-  users[0].shopping_cart = new_shopping_cart
+  // let new_shopping_cart = users[0].shopping_cart.filter(item => item.book.id != id)
+  // users[0].shopping_cart = new_shopping_cart
+
+  for(let i = 0; i < users[0].shopping_cart.length; i++) {
+    if(users[0].shopping_cart[i].book.id == id) {
+      users[0].shopping_cart.splice(i, 1)
+      break
+    }
+  }
 
   // console.log('Current cart:')
   // console.log(users[0].shopping_cart)
@@ -148,11 +163,11 @@ function removeBookFromCartByID(id) {
 // ---------------- Home Page ---------------- //
 
 app.get('/', (req, res) => {
-  if(users.length == 0){
-    res.render('index', { username : "Login"})
+  if(isUserLoggedIn()){
+    res.render('index', { isLoggedIn: true, username : `${users[0].username}` })
   }
   else {
-    res.render('index', { username : `${users[0].username}`})
+    res.render('index', { isLoggedIn: false, username : "Login" })
   }
 })
 
@@ -174,7 +189,11 @@ app.get('/settings', (req, res) => {
 // ---------------- Sign up Page ---------------- //
 
 app.get('/signup', (req, res) => {
-  res.render('signup')
+  if(isUserLoggedIn()) {
+    res.render('signup', { isLoggedIn: true, username : `${users[0].username}` })
+  } else {
+    res.render('signup', { isLoggedIn: false, username : `Login` })
+  }
 })
 
 app.post('/signup', (req, res) => {
@@ -212,10 +231,27 @@ app.post('/signup', (req, res) => {
 
 // -------------------------------------------- //
 
+// ---------------- Sign out Page ---------------- //
+
+app.get('/signout', (req, res) => {
+  if(isUserLoggedIn()) {
+    users = []
+    res.redirect('/')
+  }
+
+  res.redirect('/')
+})
+
+// -------------------------------------------- //
+
 // ---------------- Login Page ---------------- //
 
 app.get('/login', (req, res) => {
-  res.render('login')
+  if(isUserLoggedIn()) {
+    res.render('login', { isLoggedIn: true, username : `${users[0].username}` })
+  } else {
+    res.render('login', { isLoggedIn: false, username : `Login` })
+  }
 })
 
 app.post('/login', (req, res) => {
@@ -278,10 +314,10 @@ app.post('/login', (req, res) => {
 // ---------------- Cart Page ---------------- //
 
 app.get('/cart', (req, res) => {
-  if(users.length == 0) {
-    res.redirect('./login')
+  if(isUserLoggedIn()) {
+    res.render('cart', { data: users[0].shopping_cart, isLoggedIn: true, username : `${users[0].username}` }) // `${users[0].shopping_cart}`
   } else {
-    res.render('cart', {data: users[0].shopping_cart}) // `${users[0].shopping_cart}`
+    res.redirect('./login')
   }
 })
 
@@ -388,7 +424,11 @@ app.get('/shop', (req, res) => {
     genres: genres_array
   }
 
-  res.render('shop', { data: data })
+  if(isUserLoggedIn()) {
+    res.render('shop', { data: data, isLoggedIn: true, username : `${users[0].username}` })
+  } else {
+    res.render('shop', { data: data, isLoggedIn: false, username : `Login` })
+  }
 })
 
 // -------------------------------------------- //
@@ -396,7 +436,7 @@ app.get('/shop', (req, res) => {
 // ---------------- Checkout Page ---------------- //
 
 app.get('/checkout', (req, res) => {
-  if(users.length > 0) {
+  if(isUserLoggedIn()) {
     const cart = users[0].shopping_cart
     const salesTax = 1;
     let total_pretax = 0;
@@ -416,9 +456,9 @@ app.get('/checkout', (req, res) => {
       total_posttax: total_posttax,
     }
 
-    res.render('checkout', { data: data })
+    res.render('checkout', { data: data, isLoggedIn: true, username : `${users[0].username}` })
   } else {
-    res.redirect('login')
+    res.redirect('/login')
   }
 })
 
@@ -446,7 +486,7 @@ app.post('/checkout', (req, res) => {
 app.get('/orders', (req, res) => {
 
   if(users.length > 0) {
-    res.render('orders', { data: users[0].orders })
+    res.render('orders', { data: users[0].orders, isLoggedIn: true, username : `${users[0].username}` })
   } else {
     res.redirect('login')
   }

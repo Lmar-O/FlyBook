@@ -9,29 +9,31 @@
 <body>
     <%- include('../partials/navbar.ejs') %>
 
-    <div class="page-title">
-        <h1>Shop</h1>
+    <div class="page-title-container">
+        <h1 class="page-title">Shop</h1>
     </div>
+    <hr class="page-title-hr">
 
     <div class="msg-feedback" id="msg-feedback">
-        <label><span class="msg-feedback-item-name" id="msg-feedback-item-name">item</span> successfully added to cart</label>
+        <p class="msg-feedback-item-text"><span class="msg-feedback-item-name" id="msg-feedback-item-name">item</span> successfully added to cart</p>
         <div class="msg-feedback-button-container">
             <a class="ok-button" id="ok-button">Ok</a>
             <a class="goToCart-button" href="cart">Go To Cart</a>
         </div>
     </div>
 
-    <div class="search-center">
+    <div class="search-container">
         <button class="toggle-filters-panel-button" id="filter-button">Filters</button>
         <input class="search-input" id="search-input" class="search-bar" type="text" placeholder="Search"></input>
         <button class="search-button" id="search-button">Search</button>
     </div>
-    <hr />
+    
     <div class="filter-panel" id="filter-panel">
-        <h3 class="filter-title">Filters</h3>
+        <h3 class="filter-title">Filter Options:</h3>
         <div class="filter-flex-container">
+
             <div class="filter-flex-item">
-                <h3 class="filter-subtitle">Filter Options:</h3>
+                <label class="filter-header">Genre:</label>
                 <div id="genres-container">
                     <% data.genres.forEach((genre) => { %>
                         <div class="radio">
@@ -40,11 +42,11 @@
                     <% }) %>
                 </div>
             </div>
-            <div class="filter-flex-item">
-                <label>Author:</label>
-                <input id="author-filter" type="text" placeholder="Author"></input>
-            </div>
             
+            <div class="filter-flex-item">
+                <label class="filter-header">Author:</label>
+                <input class="filter-input-field" id="author-filter" type="text" placeholder="Author"></input>
+            </div>
         </div>
     </div>
     
@@ -53,6 +55,24 @@
     </div>
 
     <div class="shop-items-container" id="shop-items-container">
+        <% data.books.forEach((book) => { %>
+            <div class="item-card">
+                <div class="shop-items-img-container">
+                    <img src="<%= book.filePath %>" alt="Image of <%= book.title %> by <%= book.author %>" />    
+                </div>
+                <div class="item-card-lower-01">
+                    <div class="shop-item-info-container">
+                        <h1 class="item-title-label"><%= book.title %></h1>
+                        <p class="item-subtitle-label">by <%= book.author %></p>
+                        <p class="item-subtitle-label"><%= book.genre %></p>
+                    </div>
+                    <div class="item-card-lower-02">
+                        <h1 class="item-price-label"><%= book.price %></h1>
+                        <button class="item-button" aria-label="Add  <%= book.title %> by <%= book.author %> to Cart" onclick="addItemToCart('<%= book.id %>')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
     </div>
 </body>
 </html>
