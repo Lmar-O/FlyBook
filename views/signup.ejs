@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Sign Up</title>
+<link rel="stylesheet" href="/styles/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+    <div class="content">
+        <div class="signup-form">
+            <h2 class="login-title">Sign up</h2>
+            <div class="login-h-line"></div><br><br><br>
+            <form class="form-horizontal" action="/signup" method="post" onsubmit="return validateFormData()">
+                <div id="username-group">
+                    <label class="login-form-field-label" for="username">Username:</label><br>
+                    <input class="form-control" type="text" id="username" name="username" placeholder="Username"><br>
+                    <p class="error-feedback-message" id="username-feedback"></p>
+                </div>
+                <div id="email-group">
+                    <label class="login-form-field-label" for="email">Email:</label><br>
+                    <input class="form-control" type="text" id="email" name="email" placeholder="Email"><br>
+                    <p class="error-feedback-message" id="email-feedback"></p>
+                </div>
+                <div id="password-group">
+                    <label class="login-form-field-label" for="password">Password:</label><br>
+                    <input class="form-control" type="password" id="password" name="password" placeholder="Password"><br>
+                    <p class="error-feedback-message" id="password-feedback"></p>
+                </div>
+                <div id="repassword-group">
+                    <label class="login-form-field-label" for="repassword">Re-enter Password:</label><br>
+                    <input class="form-control" type="password" id="repassword" name="repassword" placeholder="Re-enter Password"><br><br>
+                    <p class="error-feedback-message" id="repassword-feedback"></p>
+                </div>
+
+                <% if(locals.error != null && locals.error == 'dupUser') { %>
+                    <p class="error-feedback-message">Account already registered</p>
+                <% } %>
+                
+                <div class="center-content">
+                    <input class="signup-input-button" type="submit" value="Sign Up">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        var usernameEl = document.getElementById("username");
+        var usernameFeedbackEl = document.getElementById("username-feedback");
+        var usernameGroupEl = document.getElementById("username-group");
+
+        var emailEl = document.getElementById("email");
+        var emailFeedbackEl = document.getElementById("email-feedback");
+        var emailValidationRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+        var emailGroupEl = document.getElementById("email-group");
+
+        var passwordEl = document.getElementById("password");
+        var passwordFeedbackEl = document.getElementById("password-feedback");
+        var passwordGroupEl = document.getElementById("password-group");
+
+        var repasswordEl = document.getElementById("repassword");
+        var repasswordFeedbackEl = document.getElementById("repassword-feedback");
+        var repasswordGroupEl = document.getElementById("repassword-group");
+
+        passwordEl.addEventListener("change", () => validatePassword())
+        usernameEl.addEventListener("change", () => validateUsername())
+        emailEl.addEventListener("change", () => validateEmail())
+        repasswordEl.addEventListener("change", () => {
+            repasswordFeedbackEl.textContent = ''
+        })
+        
+        function validateRepassword() {
+            if(passwordEl.value != repasswordEl.value) {
+                if(passwordGroupEl.classList.contains('has-success')) {
+                    passwordGroupEl.classList.remove('has-success')
+                    passwordGroupEl.classList.add('has-error')
+                } else 
+                if(!passwordGroupEl.classList.contains('has-error')) {
+                    passwordGroupEl.classList.add('has-error')
+                }
+
+                if(repasswordGroupEl.classList.contains('has-success')) {
+                    repasswordGroupEl.classList.remove('has-success')
+                    repasswordGroupEl.classList.add('has-error')
+                } else 
+                if(!repasswordGroupEl.classList.contains('has-error')) {
+                    repasswordGroupEl.classList.add('has-error')
+                }
+
+                repasswordFeedbackEl.textContent = 'Passwords did not match'
+                return false
+            }
+
+            repasswordFeedbackEl.textContent = ''
+            return true
+        }
+
+        function validatePassword() {
+            if(passwordEl.value == null) {
+                if(passwordGroupEl.classList.contains('has-success')) {
+                    passwordGroupEl.classList.remove('has-success')
+                    passwordGroupEl.classList.add('has-error')
+                } else 
+                if(!passwordGroupEl.classList.contains('has-error')) {
+                    passwordGroupEl.classList.add('has-error')
+                }
+
+                passwordFeedbackEl.textContent = 'Password field must be filled out';
+                return false
+            } else
+            if(!passwordEl.value.match(/[0-9]+/) 
+                || !passwordEl.value.match(/[!@#$%^&*]+/)
+                || !passwordEl.value.length > 7) 
+            {
+                if(passwordGroupEl.classList.contains('has-success')) {
+                    passwordGroupEl.classList.remove('has-success')
+                    passwordGroupEl.classList.add('has-error')
+                } else 
+                if(!passwordGroupEl.classList.contains('has-error')) {
+                    passwordGroupEl.classList.add('has-error')
+                }
+
+                passwordFeedbackEl.textContent = 'Password must contain at least 1 number, 1 special symbol (e.g. !@#$%^&*), and must 8 characters or longer.';
+                return false
+             
+            }
+
+            if(passwordGroupEl.classList.contains('has-error')) {
+                passwordGroupEl.classList.remove('has-error')
+                passwordGroupEl.classList.add('has-success')
+            } else 
+            if(!passwordGroupEl.classList.contains('has-success')) {
+                passwordGroupEl.classList.add('has-success')
+            }
+
+            passwordFeedbackEl.textContent = '';
+
+            return true;
+        }
+
+        function validateEmail() {
+            if(emailEl.value == null) {
+                if(emailGroupEl.classList.contains('has-success')) {
+                    emailGroupEl.classList.remove('has-success')
+                    emailGroupEl.classList.add('has-error')
+                } else 
+                if(!emailGroupEl.classList.contains('has-error')) {
+                    emailGroupEl.classList.add('has-error')
+                }
+
+                emailFeedbackEl.textContent = 'Email field must be filled out';
+                return false
+            } else
+            if(!emailEl.value.match(emailValidationRegex))
+            {
+                if(emailGroupEl.classList.contains('has-success')) {
+                    emailGroupEl.classList.remove('has-success')
+                    emailGroupEl.classList.add('has-error')
+                } else 
+                if(!emailGroupEl.classList.contains('has-error')) {
+                    emailGroupEl.classList.add('has-error')
+                }
+
+                emailFeedbackEl.textContent = 'Invaild email. (ex. example@gmail.com)';
+                return false
+            }
+
+            if(emailGroupEl.classList.contains('has-error')) {
+                emailGroupEl.classList.remove('has-error')
+                emailGroupEl.classList.add('has-success')
+            } else 
+            if(!emailGroupEl.classList.contains('has-success')) {
+                emailGroupEl.classList.add('has-success')
+            }
+
+            emailFeedbackEl.textContent = ''
+            return true;
+        }
+
+        function validateUsername() {
+            if(usernameEl.value == null) {
+                if(usernameGroupEl.classList.contains('has-success')) {
+                    usernameGroupEl.classList.remove('has-success')
+                    usernameGroupEl.classList.add('has-error')
+                } else 
+                if(!usernameGroupEl.classList.contains('has-error')) {
+                    usernameGroupEl.classList.add('has-error')
+                }
+
+                usernameFeedbackEl.textContent = 'Username field must be filled out';
+                return false
+            } else
+            if(usernameEl.value.length < 5)
+            {
+                if(usernameGroupEl.classList.contains('has-success')) {
+                    usernameGroupEl.classList.remove('has-success')
+                    usernameGroupEl.classList.add('has-error')
+                } else 
+                if(!usernameGroupEl.classList.contains('has-error')) {
+                    usernameGroupEl.classList.add('has-error')
+                }
+
+                usernameFeedbackEl.textContent = 'Username must be 5 or more characters';
+                return false
+            } else
+            if(!usernameEl.value.match(/^[a-zA-Z0-9]+$/))
+            {
+                usernameFeedbackEl.textContent = 'Username must be some combination of letter and numbers';
+                return false
+            }
+
+            if(usernameGroupEl.classList.contains('has-error')) {
+                usernameGroupEl.classList.remove('has-error')
+                usernameGroupEl.classList.add('has-success')
+            } else 
+            if(!usernameGroupEl.classList.contains('has-success')) {
+                usernameGroupEl.classList.add('has-success')
+            }
+
+            usernameFeedbackEl.textContent = ''
+            return true;
+        }
+        function validateFormData() {
+            
+            return validatePassword() 
+                    && validateEmail()
+                    && validateUsername()
+                    && validateRepassword()
+        }
+    </script>
+
+</body>
+</html>

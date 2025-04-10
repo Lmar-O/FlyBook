@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UI E-Commerce Website - Shop</title>
+<link rel="stylesheet" href="/styles/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="page-title">
+        <h1>Shop</h1>
+    </div>
+
+    <div class="msg-feedback" id="msg-feedback">
+        <label><span class="msg-feedback-item-name" id="msg-feedback-item-name">item</span> successfully added to cart</label>
+        <div class="msg-feedback-button-container">
+            <a class="ok-button" id="ok-button">Ok</a>
+            <a class="goToCart-button" href="cart">Go To Cart</a>
+        </div>
+    </div>
+
+    <div class="search-center">
+        <button class="toggle-filters-panel-button" id="filter-button">Filters</button>
+        <input class="search-input" id="search-input" class="search-bar" type="text" placeholder="Search"></input>
+        <button class="search-button" id="search-button">Search</button>
+    </div>
+    <hr />
+    <div class="filter-panel" id="filter-panel">
+        <h3 class="filter-title">Filters</h3>
+        <div class="filter-flex-container">
+            <div class="filter-flex-item">
+                <h3 class="filter-subtitle">Filter Options:</h3>
+                <div id="genres-container">
+                    <% data.genres.forEach((genre) => { %>
+                        <div class="radio">
+                            <label class="genre-filter-label"><input class="genre-filter-button" type="radio" name="optradio"><%=genre%></label>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+            <div class="filter-flex-item">
+                <label>Author:</label>
+                <input id="author-filter" type="text" placeholder="Author"></input>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="content">
+        <ul id="results-list"></ul>
+    </div>
+
+    <div class="shop-items-container" id="shop-items-container">
+    </div>
+</body>
+</html>
+
+<script type="text/javascript" src="/scripts/search.js"></script>
+<script type="text/javascript" src="/scripts/shop.js"></script>
