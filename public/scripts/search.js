@@ -81,14 +81,13 @@ searchButton.addEventListener('click', () => {
             </div>
             <div class="item-card-lower-01">
                 <div class="shop-item-info-container">
-                    <label class="item-title-label">${item.title}</label><br>
-                    <label class="item-subtitle-label">by ${item.author}</label><br>
-                    <label class="item-subtitle-label">${item.genre}</label><br>
-                    
+                    <h1 class="item-title-label">${item.title}</h1>
+                    <p class="item-subtitle-label">by ${item.author}</p>
+                    <p class="item-subtitle-label">${item.genre}</p>
                 </div>
                 <div class="item-card-lower-02">
-                    <label class="item-price-label">${item.price}</label>
-                    <button class="item-button" aria-label="Add ${item.title} by ${item.author} to Cart" onclick="addItemToCart(${item.id})"><label>Add to Cart</label></button>
+                    <h1 class="item-price-label">${item.price}</h1>
+                    <button class="item-button" aria-label="Add ${item.title} by ${item.author} to Cart" onclick="addItemToCart(${item.id})">Add to Cart</button>
                 </div>
             </div>
         </div>`
@@ -97,7 +96,9 @@ searchButton.addEventListener('click', () => {
                 
             });
             } else {
-                const markup = '<p>No results found<p>'
+                const fillermarkup = `<div class="center-content"><p class="no-items-feedback"></p></div>`
+                const markup = `<div class="center-content"><p class="no-items-feedback">No results found</p></div>`
+                shopItemsContainer.insertAdjacentHTML('beforeend', fillermarkup)
                 shopItemsContainer.insertAdjacentHTML('beforeend', markup)
             }
         });

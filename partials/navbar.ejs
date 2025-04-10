@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default fly-book-navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand fly-book-navbar-text" href="/">Fly Book</a>
+      <a class="navbar-brand fly-book-navbar-text" href="/">FlyBook</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="first-nav-el"><a href="/">Home</a></li>
@@ -16,8 +16,15 @@
 
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="first-nav-el-right"><a href="login">Login</a></li>
-      <li><a href="signup">Sign up</a></li>
+      <% if(locals.isLoggedIn != null && locals.isLoggedIn == true) { %>
+        <li class="nav-username-container">
+          <h1 class="nav-username">Hello, <%= locals.username %></h1>
+        </li>
+        <li><a href="signout">Sign out</a></li>
+      <% } else { %>
+        <li class="first-nav-el-right"><a href="login">Login</a></li>
+        <li><a href="signup">Sign up</a></li>
+      <% } %>
     </ul>
   </div>
 </nav>
