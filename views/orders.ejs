@@ -14,20 +14,27 @@
     </div>
     <hr class="page-title-hr">
 
-    <% if(data.length == null || data.length < 1) { %>
-        <div class="center-content">
-            <p class="no-items-feedback">No orders found</p>
-        </div>
-    <% } else { %>
-    <div class="orders-container">  
-    <% data.forEach((order) => { %>
-        <div class="order-card">
-            <p><span style="font-weight: bold;">Transaction ID:</span> <%= order.id %></p>
-            <p><span style="font-weight: bold;">Total:</span> $<%= order.total %></p>
-            <p><span style="font-weight: bold;">Date of Transaction: </span><%= order.date %></p>
-        </div>
-
-    <% })} %>
+    <div class="orders-container">
+        <% if (data.orders.length > 0) { %>
+            <% data.orders.forEach(order => { %>
+                <div class="order-card">
+                    <div class="order-card-header">
+                        <p class="transaction-id">Transaction ID: <%= order.id %></p>
+                        <p class="order-date">Date: <%= order.date %></p>
+                        <p class="order-total">Total: <%= parseFloat(order.total).toFixed(2) %> USD</p>
+                    </div>
+                    <div class="order-items-container">
+                        <% order.items_purchased.forEach(item => { %>
+                            <div class="order-item-card">
+                                <img src="<%= item.filePath %>" alt="Image of <%= item.title %>" />
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No orders found.</p>
+        <% } %>
     </div>
 </body>
 </html>

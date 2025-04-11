@@ -68,33 +68,35 @@ function isUserLoggedIn() {
 }
 
 function buyAllItemsInCart() {
-  let total = 0
-  let salesTax = 1.0825
+    let total = 0;
+    let salesTax = 1.0825;
 
-  users[0].shopping_cart.forEach(item => total += item.book.priceNum)
+    users[0].shopping_cart.forEach(item => total += item.book.priceNum);
 
-  total *= salesTax
-  
-  total = Math.round(total * 100)  / 100
+    total *= salesTax;
+    total = Math.round(total * 100) / 100;
 
-  const order_id = users[0].orders.length + 1
+    const order_id = users[0].orders.length + 1;
 
-  const now = new Date()
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0')
-  const day = String(now.getDate()).padStart(2, '0');
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
 
-  const date_str = `${month}/${day}/${year}`
+    const date_str = `${month}/${day}/${year}`;
 
-  const new_order = {
-    id: order_id,
-    total: total,
-    date: date_str,
-    items_purchased: users[0].shopping_cart
-  }
+    const new_order = {
+        id: order_id,
+        total: total,
+        date: date_str,
+        items_purchased: users[0].shopping_cart.map(item => ({
+            title: item.book.title,
+            filePath: item.book.filePath // Include the image path
+        }))
+    };
 
-  users[0].orders.push(new_order)
-  users[0].shopping_cart = []
+    users[0].orders.push(new_order); // Add the new order to the orders array
+    users[0].shopping_cart = []; // Clear the shopping cart
 }
 
 function getBookByID(id) {
@@ -452,34 +454,30 @@ app.get('/checkout', (req, res) => {
 })
 
 app.post('/checkout', (req, res) => {
-  // Server side validation skipped for now
-  // console.log(req.body.creditCardNumber)
-  // console.log(req.body.cvv)
-  // console.log(req.body.cardHolderName)
+    if (users.length > 0) {
+        buyAllItemsInCart(); // Add items to the orders array
 
-  if(users.length > 0) {
-    buyAllItemsInCart()
-
-    //console.log(users[0])
-
-    res.redirect('shop?success=1')
-  } else {
-    res.redirect('login')
-  }
-})
+        res.redirect('shop?success=1');
+    } else {
+        res.redirect('login');
+    }
+});
 
 // -------------------------------------------- //
 
 // ---------------- Orders Page ---------------- //
 
 app.get('/orders', (req, res) => {
-
-  if(users.length > 0) {
-    res.render('orders', { data: users[0].orders, isLoggedIn: true, username : `${users[0].username}` })
-  } else {
-    res.redirect('login')
-  }
-})
+    if (isUserLoggedIn()) {
+        const data = {
+            orders: users[0].orders, // Pass the orders array
+            username: users[0].username
+        };
+        res.render('orders', { data: data, isLoggedIn: true, username: `${users[0].username}` });
+    } else {
+        res.redirect('/login');
+    }
+});
 
 app.get('api/orders', (req, res) => {
   const maxSize = req.query.maxSize

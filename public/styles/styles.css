@@ -242,8 +242,8 @@ label {
 
     > img {
         border-radius: 11px;
-        max-height: 238px;
-        max-width: 326px;
+        max-height: 260px; /* Increase the maximum height */
+        max-width: 340px; /* Increase the maximum width */
     }
 }
 
@@ -557,42 +557,80 @@ footer.shop-footer {
 /* ---------------------- Orders styles ---------------------- */
 
 .orders-container {
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 60%;
+    margin: 0 auto; /* Center the container horizontally */
+    width: 95%; /* Span most of the page width */
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    justify-content: space-evenly;
+    grid-template-columns: 1fr; /* Single column layout */
+    gap: 20px; /* Add spacing between order cards */
     justify-items: center;
-    justify-self: center;
 }
 
 .order-card {
-    height: 200px;
-    width: 100%;
-    background-color: rgb(255 255 255);
-    border: 1px solid rgb(177 177 177);
+    width: 100%; /* Span the full width of the container */
+    max-width: 1200px; /* Set a maximum width for larger screens */
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(177, 177, 177);
     border-radius: 10px;
     padding: 1%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
-    justify-content: space-around;
-    align-items: anchor-center;
+    flex-direction: column; /* Stack text and images vertically */
+    gap: 10px; /* Add spacing between text and images */
 }
 
-.order-card button {
-    height: 70px;
-    width: 70px;
-    background-color: #e30f0f;
-    color: white;
-    font-weight: 800;
-    border: 3px solid #792020;
-    border-radius: 10px;
+.order-card-header {
+    display: flex;
+    justify-content: space-between; /* Align text horizontally */
+    align-items: center; /* Vertically center the text */
+    width: 100%;
+}
+
+.transaction-id, .order-date, .order-total {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.order-items-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow images to wrap to the next line */
+    gap: 15px; /* Add spacing between images */
+    justify-content: flex-start; /* Align images to the left */
+    margin-top: 10px; /* Add spacing above the images */
+}
+
+.order-item-card {
+    flex: 0 0 auto; /* Prevent shrinking or growing */
+    width: 140px; /* Set the size of the images */
+    height: 140px;
+    text-align: center;
+}
+
+.order-item-card img {
+    width: auto; /* Maintain aspect ratio */
+    height: 100%; /* Scale height to fit */
+    max-height: 120px; /* Set a maximum height */
+    max-width: 120px; /* Set a maximum width */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    object-fit: contain; /* Ensure the image fits within the container */
+}
+
+.order-item-card.ellipsis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+    width: 120px;
+    height: 120px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
 }
 
 /* ---------------------- Cart styles ---------------------- */
-
 .cart-container {
     margin-left: 5%;
     margin-right: 5%;
@@ -608,7 +646,7 @@ footer.shop-footer {
     justify-items: center;
     background-color: #fff4e5;
     border-radius: 15px;
-    padding: 10px;
+    padding: 15px;
 }
 
 .cart-card {
@@ -665,7 +703,6 @@ p.cart-subtitle {
     font-weight: 800;
     border: 3px solid #792020;
     border-radius: 10px;
-    
 }
 
 .cart-card div button:hover {
@@ -676,7 +713,6 @@ p.cart-subtitle {
     font-weight: 800;
     border: 3px solid #792020;
     border-radius: 10px;
-    
 }
 
 .cart-content-container {
@@ -713,16 +749,14 @@ p.cart-subtitle {
     color: white;
 }
 
-
 /* ---------------------- Settings styles ---------------------- */
-
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
     margin-left: auto;
-    margin-right: 10%
+    margin-right: 10%;
 }
 
 .switch input {
@@ -833,7 +867,7 @@ div.setting-page-banner {
 
 .setting-name-container {
     vertical-align: middle;
-    margin-left: 10%
+    margin-left: 10%;
 }
 
 .setting-name {
@@ -877,7 +911,7 @@ h2.checkout-subtitle {
 }
 
 .checkout-payment-field-container {
-    width: 100%;
+    width: 100%
 }
 
 .checkout-content-payment-subcontainer {
@@ -1000,7 +1034,7 @@ a.orange-button {
     background-color: var(--primary-color);
     border: 2px, solid, var(--button-border-color-a);
     color: var(--text-color-a);
-    height: 100%; 
+    height: 100%;
     width: 100px;
     text-align: center;
     display: inline-block;
@@ -1069,7 +1103,6 @@ a.cart-button-position {
 }
 
 /* ---------------------- Signup styles ---------------------- */
-
 .signup-link-position-right {
     justify-self: right;
     padding-bottom: 20px;
@@ -1102,6 +1135,5 @@ a.cart-button-position {
     color: white;
     font-weight: 600;
     align-content: center;
-    justify-self: center;
 }
 
