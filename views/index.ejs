@@ -10,9 +10,6 @@
 <body>
     <%- include('../partials/navbar.ejs') %>
     
-    <div class="page-title-container">
-        <h1 class="page-title">Home</h1>
-    </div>
     <hr class="page-title-hr">
     
     <div class="content">
@@ -26,6 +23,76 @@
                 books in the shop page.
             </p>
         </div>
+
+        <!-- Best Sellers Section. Books are hard coded since books.csv doesn't include sales info -->
+        <div class="best-sellers-section">
+            <h2 class="best-sellers-title">Best Sellers</h2>
+            <div class="shop-items-container">
+                <!-- Card for "Sunrise on the Reaping" -->
+                <div class="item-card">
+                    <div class="shop-items-img-container">
+                        <img src="/images/SunriseOnTheReaping.jpg" alt="Image of Sunrise on the Reaping by Suzanne Collins" />
+                    </div>
+                    <div class="item-card-lower-01">
+                        <div class="shop-item-info-container">
+                            <h1 class="item-title-label">Sunrise on the Reaping</h1>
+                            <p class="item-subtitle-label">by Suzanne Collins</p>
+                            <p class="item-subtitle-label">Science Fiction</p>
+                        </div>
+                        <div class="item-card-lower-02">
+                            <h1 class="item-price-label">22.39 USD</h1>
+                            <button class="item-button" aria-label="Add Sunrise on the Reaping by Suzanne Collins to Cart" onclick="addItemToCart(11)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card for "Say You'll Remember Me" -->
+                <div class="item-card">
+                    <div class="shop-items-img-container">
+                        <img src="/images/SayYoullRememberMe.jpg" alt="Image of Say You'll Remember Me by Abby Jimenez" />
+                    </div>
+                    <div class="item-card-lower-01">
+                        <div class="shop-item-info-container">
+                            <h1 class="item-title-label">Say You'll Remember Me</h1>
+                            <p class="item-subtitle-label">by Abby Jimenez</p>
+                            <p class="item-subtitle-label">Romance Novel</p>
+                        </div>
+                        <div class="item-card-lower-02">
+                            <h1 class="item-price-label">25.00 USD</h1>
+                            <button class="item-button" aria-label="Add Say You'll Remember Me by Abby Jimenez to Cart" onclick="addItemToCart(26)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card for "Atomic Habits" -->
+                <div class="item-card">
+                    <div class="shop-items-img-container">
+                        <img src="/images/AtomicHabits.jpg" alt="Image of Atomic Habits by James Clear" />
+                    </div>
+                    <div class="item-card-lower-01">
+                        <div class="shop-item-info-container">
+                            <h1 class="item-title-label">Atomic Habits</h1>
+                            <p class="item-subtitle-label">by James Clear</p>
+                            <p class="item-subtitle-label">Self-Help</p>
+                        </div>
+                        <div class="item-card-lower-02">
+                            <h1 class="item-price-label">11.98 USD</h1>
+                            <button class="item-button" aria-label="Add Atomic Habits by James Clear to Cart" onclick="addItemToCart(9)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="msg-feedback" id="msg-feedback">
+        <p class="msg-feedback-item-text">
+            <span class="msg-feedback-item-name" id="msg-feedback-item-name">item</span> successfully added to cart
+        </p>
+        <div class="msg-feedback-button-container">
+            <a class="ok-button" id="ok-button">Ok</a>
+            <a class="goToCart-button" href="cart">Go To Cart</a>
+        </div>
+    </div>
+<script type="text/javascript" src="/scripts/search.js"></script>
 </body>
 </html>
